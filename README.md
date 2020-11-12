@@ -10,9 +10,12 @@
 
 ## 자료구조
 
-* [자료구조]()
+* [자료구조란]()
 * List
-  * Array vs List
+  * [ArrayList]()
+  * LinkedList
+  * DoubleLinkedList
+  * ArrayList vs LinkedList
 * Stack
 * Queue
 * Hash Table
