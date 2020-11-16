@@ -11,17 +11,13 @@
   * [ArrayList](https://github.com/binghe819/tech-interview/blob/master/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/List/ArrayList.md)
   * [LinkedList](https://github.com/binghe819/tech-interview/blob/master/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/List/LinkedList.md)
   * [DoubleLinkedList](https://github.com/binghe819/tech-interview/blob/master/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/List/DoubleLinkedList.md)
-  * ArrayList vs LinkedList
+  * [ArrayList vs LinkedList](https://github.com/binghe819/tech-interview/blob/master/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/List/ArrayList%20vs%20LinkedList.md)
 * Stack
 * Queue
 * Hash Table
 * Tree
 * Heap
 * Trie
-
-
-
-
 
 
 
@@ -39,16 +35,6 @@
   * Binary Search
   * Depth First Search
   * Breadth First Search
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -77,34 +63,6 @@
 
 
 ## DB
-
-
-
-
-
-
-
-
-
-## JAVA
-
-
-
-
-
-
-
-## JavaScript
-
-
-
-
-
-
-
-## 디자인 패턴
-
-
 
 
 
