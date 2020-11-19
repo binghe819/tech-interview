@@ -42,7 +42,7 @@
 
 <p align="center"><img src="image/2903.png"  /><br>출처 : https://www.opentutorials.org/module/1335/8821</p>
 
-<img src="image/image-20201105160130685.png" width="300" />
+<p align="center"><img src="image/image-20201105160130685.png" width="300" /></p>
 
 
 
