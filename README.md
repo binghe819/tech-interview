@@ -15,7 +15,7 @@
 * [Stack](https://github.com/binghe819/tech-interview/blob/master/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/Stack/Stack.md)
 * Queue
   * [Queue](https://github.com/binghe819/tech-interview/blob/master/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/Queue/Queue.md)
-  * [Deque]()
+  * [Deque](https://github.com/binghe819/tech-interview/blob/master/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/Queue/Deque.md)
 * Hash Table
 * Tree
 * Heap
