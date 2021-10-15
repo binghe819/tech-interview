@@ -9,18 +9,18 @@
 <details>
   <summary>자료구조란?</summary>
   <a href="./%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%EB%9E%80.md">자료구조란?</a>
-  <div markdown="1"> 
-    [테스트](./%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%EB%9E%80.md)
-  </div>
-  
 </details>
 
-* [자료구조란](./%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%EB%9E%80.md)
-* List
-  * [ArrayList](https://github.com/binghe819/tech-interview/blob/master/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/List/ArrayList.md)
-  * [LinkedList](https://github.com/binghe819/tech-interview/blob/master/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/List/LinkedList.md)
-  * [DoubleLinkedList](https://github.com/binghe819/tech-interview/blob/master/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/List/DoubleLinkedList.md)
-  * [ArrayList vs LinkedList](https://github.com/binghe819/tech-interview/blob/master/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/List/ArrayList%20vs%20LinkedList.md)
+<details>
+  <summary>ArrayList vs LinkedList</summary>
+  <ul>
+    <li><a href="./%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/List/ArrayList.md" >ArrayList</a</li>
+    <li><a href="./%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/List/LinkedList.md" >LinkedList</a</li>
+    <li><a href="./%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/List/DoubleLinkedList.md" >DoubleLinkedList</a</li>
+    <li><a href="./%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/List/ArrayList%20vs%20LinkedList.md" >ArrayList vs LinkedList</a</li>
+  </ul>
+</details>
+
 * Stack
   * [Stack](https://github.com/binghe819/tech-interview/blob/master/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/Stack/Stack.md)
   * [Stack으로 Queue 구현하기]()
