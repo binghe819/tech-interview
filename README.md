@@ -60,7 +60,7 @@
 
 ### 공통
 
-#### 자바란 무엇인가?
+#### Q. 자바란 무엇인가?
 <details>
   <summary>답변</summary>
 
@@ -72,19 +72,7 @@
     * 멀티 스레드를 지원한다.
 </details>
 
-#### 자바 프로그램의 동작 과정
-<details>
-  <summary>답변</summary>
-  
-  1. JAVA 소스 코드 파일 (.java)를 JAVA 컴파일러 (javac)로 바이트 코드(.class)로 변환한다.
-  2. JVM 내에 있는 Class Loader가 runtime data area로 바이트 코드 파일을 적재한다.
-     * Loading -> Linking -> Initializing
-  3. JVM 내에 있는 execution engine(Interpreter, JIT Compiler, GC)이 runtime data area에 적재된 바이트 코드를 기계어로 변경해 명령어 단위로 실행한다.
-  
-  > 더 자세한 내용은 [여기](https://github.com/binghe819/TIL/blob/master/JAVA/JVM/jvm_structure.md)
-</details>
-
-#### Primitive Type vs Wrapper class
+#### Q. Primitive Type vs Wrapper class
 <details>
   <summary>답변</summary>
 
@@ -101,7 +89,7 @@
       * **Wrapper Class를 연산하면 오토박싱/언박싱이 일어나기에 비효율적이다.**
 </details>
 
-#### Generic은 왜 Wrapper Class만 사용한가?
+#### Q. Generic은 왜 Wrapper Class만 사용한가?
 <details>
   <summary>답변</summary>
 
@@ -111,7 +99,7 @@
   * [참고 1](https://www.quora.com/Why-is-it-impossible-to-use-primitive-types-as-a-type-parameter-in-Java), [참고 2](https://stackoverflow.com/questions/2721546/why-dont-java-generics-support-primitive-types)
 </details>
 
-#### 생성자 vs 정적 팩토리 메서드
+#### Q. 생성자 vs 정적 팩토리 메서드
 <details>
   <summary>답변</summary>
 
@@ -127,7 +115,7 @@
     * static 팩토리 메서드는 프로그래머가 찾기 어렵다.
 </details>
 
-#### String 객체는 객체인데 왜 new로 선언하지 않는가?
+#### Q. String 객체는 객체인데 왜 new로 선언하지 않는가?
 <details>
   <summary>답변</summary>
 
@@ -135,7 +123,7 @@
   * 즉, 상수처럼 **이미 선언된 String 객체가 있으면 이 영역에서 가져다 사용하고, 없다면 여기에 새롭게 객체를 생성하여 사용한다.**
 </details>
 
-#### ""와 new String("")의 차이점은?
+#### Q. ""와 new String("")의 차이점은?
 <details>
   <summary>답변</summary>
   
@@ -144,9 +132,9 @@
   * `new String()`는 일반 클래스와 마찬가지로 Heap에 문자열 객체로 생성된다.
 </details>
 
-#### 불변 객체를 써야하는 이유
+#### Q. 불변 객체를 써야하는 이유
 <details>
-  <summary></summary>
+  <summary>답변</summary>
 
   * 불변 객체란?
     * 불변 객체란 **생성 후 그 상태를 변경할 수 없는 객체**를 말한다. 반대 개념으로 가변(mutable)객체가 있다.
@@ -162,9 +150,11 @@
     * GC의 성능을 높일 수 있다.
   * 컬렉션을 불변으로 만들려면 요소도 불변으로 만들어줘야된다.
     * `List`를 불변으로 해도, 그 요소가 불변이 아니면 언제든 가변이 될 수 있기 때문이다. 
+  * 단점으로는 메모리 낭비를 유발할 수 있다는 것이다.
+    * 단, 이것은 GC 커스텀을 통해 개선할 수 있을 듯 하다.
 </details>
 
-#### 불변 만드는 방법
+#### Q. 불변 만드는 방법
 <details>
   <summary>답변</summary>
 
@@ -179,7 +169,7 @@
     * 더 자세한 내용은 [여기](https://github.com/binghe819/TIL/blob/master/JAVA/%EA%B8%B0%ED%83%80/%EB%B6%88%EB%B3%80%20%EA%B0%9D%EC%B2%B4.md)
 </details>
 
-#### 자바에서 null을 안전하게 다루는 방법은?
+#### Q. 자바에서 null을 안전하게 다루는 방법은?
 <details>
   <summary>답변</summary>
 
@@ -201,7 +191,7 @@
     * JSR 308 (`@NonNull`, `@Nullable`)
 </details>
 
-#### Optional 사용시 주의할 점
+#### Q. Optional 사용시 주의할 점
 <details>
   <summary>답변</summary>
 
@@ -216,7 +206,7 @@
   * 더 자세한 내용은 [여기](http://homoefficio.github.io/2019/10/03/Java-Optional-%EB%B0%94%EB%A5%B4%EA%B2%8C-%EC%93%B0%EA%B8%B0/)를 참고
 </details>
 
-#### java의 main 메서드가 static인 이유 - 미완
+#### Q. java의 main 메서드가 static인 이유 - 미완
 <details>
   <summary>답변</summary>
   <ul>
@@ -225,7 +215,7 @@
   </ul>
 </details>
 
-#### java의 non-static와 static의 차이
+#### Q. java의 non-static와 static의 차이
 <details>
   <summary>답변</summary>
 
@@ -236,7 +226,7 @@
   * 쉽게 얘기하면, **non-static은 인스턴스(객체)에 속하고, static은 클래스 자체에 속한다.**
 </details>
 
-#### java의 데이터 타입
+#### Q. java의 데이터 타입
 <details>
   <summary>답변</summary>
 
@@ -255,7 +245,7 @@
     * 클래스, 인터페이스
 </details>
 
-#### Enum을 사용하는 이유는?
+#### Q. Enum을 사용하는 이유는?
 <details>
   <summary>답변</summary>
 
@@ -267,7 +257,7 @@
   * Enum은 싱글톤 (하나만 생성하여 여러 객체가 나눠서 사용함)이며, new를 통해 생성할 수 없다.
 </details>
 
-#### Generic을 사용하는 이유
+#### Q. Generic을 사용하는 이유
 <details>
   <summary>답변</summary>
   
@@ -277,7 +267,7 @@
     * `<? extends Object>`: Object를 상속받은 객체를 받아 들인다.
 </details>
 
-#### 오버로딩과 오버라이딩의 차이
+#### Q. 오버로딩과 오버라이딩의 차이
 <details>
   <summary>답변</summary>
   
@@ -290,7 +280,7 @@
     * 기존의 메서드를 재정의하는 것.
 </details>
 
-#### try-with-resource
+#### Q. try-with-resource
 <details>
   <summary>답변</summary>
   
@@ -298,7 +288,7 @@
   * `Closeable`을 구현하고 있는 객체만이 사용 대상이 될 수 있다. **리소스에 대한 자동 반납 기능을 지원한다.**
 </details>
 
-#### Stream이란? 장점과 특징은?
+#### Q. Stream이란? 장점과 특징은?
 <details>
   <summary>답변</summary>
   
@@ -322,7 +312,7 @@
     * 최종 연산
 </details>
 
-#### Stream에서 map과 flatmap의 차이는?
+#### Q. Stream에서 map과 flatmap의 차이는?
 <details>
   <summary>답변</summary>
   
@@ -330,7 +320,7 @@
   * flatmap은 스트림의 형태(요소)가 배열이나 리스트일 때 각 리스트의 모든 원소를 특정 형태로 변환하고 단일 원소 스트림으로 반환시켜주는 중간 연산 메서드.
 </details>
 
-#### 함수형 프로그래밍 개념과 특징
+#### Q. 함수형 프로그래밍 개념과 특징
 <details>
   <summary>답변</summary>
   
@@ -375,7 +365,7 @@
     * 불변이기에 코드를 예측하기 쉽다.
 </details>
 
-#### Lambda식이란?
+#### Q. Lambda식이란?
 <details>
   <summary>답변</summary>
   
@@ -390,7 +380,7 @@
     * 익명 클래스와는 다르게 클래스를 생성하지 않는다.
 </details>
 
-#### 익명 클래스 vs 람다식
+#### Q. 익명 클래스 vs 람다식
 <details>
   <summary>답변</summary>
   
@@ -414,7 +404,7 @@
     * 람다가 람다식 범위 밖의 변수에 접근하고자 한다면, 해당 변수는 `final`이어야 한다.
 </details>
 
-#### 함수와 메서드의 차이
+#### Q. 함수와 메서드의 차이
 <details>
   <summary>답변</summary>
   
@@ -425,7 +415,7 @@
     * 모든 메서드는 클래스에 포함되어야하므로 클래스도 새로 만들어야 한다.
 </details>
 
-#### Java 8에 추가된 기능
+#### Q. Java 8에 추가된 기능
 <details>
   <summary>답변</summary>
   
@@ -438,7 +428,7 @@
     * Optional
 </details>
 
-#### ==과 equals()의 차이점은?
+#### Q. ==과 equals()의 차이점은?
 <details>
   <summary>답변</summary>
   
@@ -453,7 +443,7 @@
   * [더 자세한 내용](https://github.com/binghe819/TIL/blob/master/JAVA/Effective%20Java/item11.md)
 </details>
 
-#### Checked Exception vs Unchecked Exception
+#### Q. Checked Exception vs Unchecked Exception
 <details>
   <summary>답변</summary>
   
@@ -467,7 +457,7 @@
     * ex. NPE, RuntimeException
 </details>
 
-#### Checked Exception을 지양하는 이유는?
+#### Q. Checked Exception을 지양하는 이유는?
 <details>
   <summary>답변</summary>
   
@@ -483,9 +473,256 @@
     * 하지만, 개인적으로 Unchecked를 사용하고, 문서화를 하는 것이 좋아보인다.
 </details>
 
+#### Q. 업캐스팅과 다운캐스팅
+<details>
+  <summary>답변</summary>
+  
+  * `캐스팅 == 형변환`
+  * 업캐스팅
+    * **하위 클래스의 객체가 상위 클래스 타입으로 형변환 되는 것.**
+    * **상위 클래스 타입의 참조변수로 하위 클래스의 인스턴스를 참조하면 묵시적으로 업캐스팅이 발생한다.**
+    * 물론 이때, 하위 클래스의 멤버에는 접근 불가하다.
+  * 다운캐스팅
+    * **자신의 고유한 특성을 잃은 하위 클래스의 객체를 다시 복구시켜주는 것을 의미한다.**
+    * 즉, 업캐스팅된 것을 다시 원상태로 돌리는 것.
+    * **주의 할점은 업캐스팅이 선행되어야 하며, 명시적으로 타입을 지정해줘야한다.**
+</details>
+
+#### Q. 정적 바인딩 vs 동적 바인딩이란
+<details>
+  <summary>답변</summary>
+  
+  * 바인딩
+    * 프로그램 구성 요소의 성격을 결정해주는 것.
+    * ex. 변수의 데이터 타입이 무엇인지 정해지는 것.
+  * 정적 바인딩
+    * 컴파일타임에 성격이 결정된다.
+      * 변수의 경우 정적 할당(ex. c, c++,java). 컴파일 타임에 타입이 결정됨.
+      * 메서드의 경우, 호출되는 메서드가 컴파일 타임에 결정된다.
+  * 동적 바인딩
+    * 다형성을 사용하여 메서드를 호출할 때, 발생하는 현상.
+    * 런타임에 성격이 결정된다.
+      * 변수의 경우 동적 할당(ex. python, kotlin). 런타임에 타입이 결정됨.
+      * 메서드의 경우, 호출되는 메서드가 런타임에 결정된다.
+</details>
+
+#### Q. String vs StringBuffer vs StringBuilder
+<details>
+  <summary>답변</summary>
+  
+  * String은 불변, 나머지 둘은 가변
+    * String은 불변이므로 지정된 문자열을 변경할 수 없다.
+    * 나머지 둘은 변경이 가능하다.
+  * StringBuffer와 StringBuilder의 장점
+    * 문자열을 변경할 수 있기에 많은 문자열 연산시에 더 효율적이다.
+  * StringBuffer와 StringBuilder의 차이점
+    * StringBuffer는 equals 메서드를 오버라이딩하지 않는다.
+    * StringBuilder는 StringBuffer에서 스레드 동기화 기능만 뺀 클래스이다. 멀티 스레드가 아니라면 StringBuilder가 더 효율적이다.
+</details>
+
+#### Q. HashMap vs HashTable vs ConcurrentHashmap
+<details>
+  <summary>답변</summary>
+  
+  * 공통점
+    * 모두 Map 인터페이스를 구현한 구현체이며, `key:value` 구조를 가진 자료구조다.
+  * thread-safe
+    * HashMap은 주요 메서드에 synchronized 키워드가 없어 thread-safe하지 않다.
+    * HashTable은 주요 메서드에 synchronized 키워드가 있어 thread-safe하다. 당연히 HashMap보다 느리다.
+    * ConcurrentHashMap은 주요 메서드에 synchronized 키워드가 없지만, thread-safe하다. 서로 다른 스레드가 같은 해시 버킷에 접근할 때만 해당 블록이 잠기게 되므로, HashTable보다 효율적이다.
+  * null 허용
+    * HashMap은 key, value에 null을 허용한다.
+    * HashTable과 ConcurrentHashMap은 key, value에 null을 허용하지 않는다.
+</details>
+
+#### Q. HashMap vs TreeMap vs LinkedHashMap
+<details>
+  <summary>답변</summary>
+  
+  * 조회
+    * HashMap은 Hashing을 사용하여 데이터를 저장하기 때문에 조회시 O(1)이다.
+    * TreeMap은 내부적으로 Red-Black 트리를 사용해 데이터를 저장하기 때문에 조회시 O(logN)이다.
+  * 데이터 순서
+    * HashMap은 데이터의 순서가 보장되지 않는다.
+    * TreeMap과 LinkedHashMap은 데이터의 순서를 보장한다.
+</details>
+
+#### Q. java.util.Stack이 잘못된 이유
+<details>
+  <summary>답변</summary>
+  
+  * Stack의 문제점
+    1. Vector를 상속받는다. Vector는 LIFO가 아닌 중간에 데이터 삽입, 삭제 연산도 가능하기 때문에 Stack의 본질에서 벗어난다.
+    2. Stack은 synchronized 키워드로 thread-safe를 보장한다. 이는 성능적으로 오버헤드가 크다. 실사용 서버에선 좋은 선택이 아니다.
+  * Stack 대신 무엇을 써야하는가?
+    * Java API 문서에서는 더 완벽한 LIFO 자료구조로 Deque의 구현체인 ArrayDeque를 사용하라고 추천한다.
+    * thread-safe해야한다면, ConcurrentLinkedDeque을 사용하면 된다. 이는 lock-free한 자료구조를 사용하여 thread-safe를 보장하여 성능상 더 유리하다고 한다.
+</details>
+
+#### Q. Inner Class와 Nested Class
+<details>
+  <summary>답변</summary>
+  
+  * 자바에선 class 안에 class를 선언할 수 있다.
+    * 이를 통해 논리적으로 군집화를 할 수 있으며, 불필요한 외부 노출을 줄여 캡슐화를 할 수 있다. 또한, 가독성을 높이며 유지 보수하기 좋은 코드를 작성할 수 있다.
+  * 종류
+    * Static Nested Class
+    * Inner Class
+      * Local Inner Class
+      * Anonymous Class
+  * Static Nested Class vs Inner Class
+    * 둘의 차이점은 static으로의 선언 여부이다. Inner Class는 static을 붙이지 않는 경우다.
+    * 멤버 접근
+      * Static Nested Class는 Outer Class의 static 멤버를 제외한 어떠한 멤버도 접근할 수 없다.
+      * Inner Class는 Outer Class의 모든 멤버에 접근 가능하다.
+    * 객체 생성
+      * Static Nested Class는 Outer Class와 관계없이 독립적으로 객체를 생성 가능.
+      * Inner Class는 Outer Class의 객체를 생성한 뒤 해당 객체를 이용해서 객체를 생성할 수 있다.
+        * Inner Class의 경우 보통 Outer Class에 대한 참조를 갖고 있다. 이로인해 GC가 수거하지 못해, 메모리 누수 가능성이 있다.
+  * Nested Class를 구현하는데 Outer Class에 대한 멤버를 참조하지 않는다면, 무조건 Static Nested Class로 선언해주는 것이 좋다.
+</details>
+
+#### Q. 접근 제어자
+<details>
+  <summary>답변</summary>
+  
+  * 접근 제어자란?
+    * 클래스나 멤버 선언 시 부가적인 의미를 부여하는 키워드.
+    * 객체지향의 정보 은닉을 위해 사용된다.
+  * 종류
+    * public: 외부에 전체 공개되며, 어디에서나 접근할 수 있다.
+    * protected: 같은 패키지 혹은 다른 패키지에서 해당 클래스를 상속한 클래스에서 접근 가능하다.
+    * default: 클래스 멤버는 같은 클래스의 멤버와 같은 패키지에 속하는 멤버에서만 접근 가능하다.
+    * private: 같은 클래스 내에서만 접근 가능하며, 외부에서 접근이 불가능하다.
+</details>
+
+#### Q. System.out.println()대신 로깅을 사용하는이유
+<details>
+  <summary>답변</summary>
+  
+  * System.out.println의 단점
+    * 로그가 시스템 콘솔에만 출력된다.
+    * 로그 레벨을 설정할 수 없다.
+    * 내부적으로 멀티스레드 환경에서 thread-safe를 보장하기 위해 synchronized를 이용하므로 성능이 좋지 않다.
+  * 로깅 라이브러리의 장점
+    * 많은 부가 정보 (스레드 정보, 클래스 이름)를 쉽게 볼 수 있다.
+    * 로그 레벨을 설정할 수 있다.
+    * 로그를 시스템 콘솔 외에도 파일이나 특정 서버로 보낼 수 있다. (저장 가능)
+    * 비동기적으로 동작하도록 만들 수 있다. (성능상 좋음)
+</details>
+
 <br>
 
 ### JVM, GC
+
+#### Q. JVM이란?
+<details>
+  <summary>답변</summary>
+  
+  * JVM이란
+    * 자바 가상 머신.
+    * 자바 바이트코드를 실행할 수 있게 해주는 주체다.
+  * JVM의 특징
+    * WORA (Write Once, Run Anywhere)
+      * JVM은 플랫폼에 독립적이며, 모든 자바 가상 머신은 자바 가상 머신 규격에 정의된 대로 자바 바이트 코드를 실행한다. (스펙)
+      * 모든 자바 프로그램은 CPU나 운영 체제의 종류와 무관하게 동일하게 동작하는 것을 보장한다.
+      * 윈도우, 맥, 리눅스.. 등등 운영체제에 종속적이지 않다.
+    * GC
+      * 클래스 인스턴스는 사용자 코드에 의해 명시적으로 생성되고 GC에 의해 자동적으로 소멸된다.
+</details>
+
+#### Q. 자바 프로그램의 동작 과정
+<details>
+  <summary>답변</summary>
+  
+  1. JAVA 소스 코드 파일 (.java)를 JAVA 컴파일러 (javac)로 바이트 코드(.class)로 변환한다.
+  2. JVM 내에 있는 Class Loader가 runtime data area로 바이트 코드 파일을 적재한다.
+     * Loading -> Linking -> Initializing
+  3. JVM 내에 있는 execution engine(Interpreter, JIT Compiler, GC)이 runtime data area에 적재된 바이트 코드를 기계어로 변경해 명령어 단위로 실행한다.
+  
+  > 더 자세한 내용은 [여기](https://github.com/binghe819/TIL/blob/master/JAVA/JVM/jvm_structure.md)
+</details>
+
+#### Q. JVM 메모리 구조
+<details>
+  <summary>답변</summary>
+  
+  * 자바의 실행 과정
+    * JVM 내에 있는 Class Loader가 runtime data area로 바이트 코드 파일을 적재한다.
+  * Runtime Data Area 구조
+    * Method 영역 (static 영역)
+      * 클래스 수준의 정보 (클래스 이름, 부모 클래스 이름, 메서드, 변수)를 저장한다. static으로 선언된 데이터들도 저장된다.
+      * 프로그램이 끝날 때까지 유지되는 자원을 저장한다.
+      * 모든 스레드에서 공유할 수 있는 자원
+    * Heap 영역
+      * new를 통해 생성된 객체와 배열이 저장된다.
+      * GC의 대상이 되는 영역.
+      * 모든 스레드에서 공유할 수 있는 자원.
+    * Stack 영역
+      * 메서드를 호출할 때마다 해당 메서드를 실행하기 위한 스택 프레임이 생성되는 영역. (콜스택)
+      * 스택 프레임 내의 지역변수, 파라미터, 리턴 값, 참조 변수등을 저장한다.
+      * 스레드마다 독립적으로 존재하는 영역이며, 스레드 간 공유가 불가능하다.
+  * 더 자세한 내용은 [여기](https://github.com/binghe819/TIL/blob/master/JAVA/JVM/jvm_structure.md)
+</details>
+
+#### Q. GC란? - 예정
+<details>
+  <summary>답변</summary>
+  
+  
+</details>
+
+#### Q. GC 동작 방식 - 예정
+<details>
+  <summary>토글</summary>
+  
+  
+</details>
+
+#### Q. call by value와 call by reference
+<details>
+  <summary>답변</summary>
+  
+  * call by value
+    * 함수 호출시 전달되는 변수의 값을 복사하여 함수의 인자로 전달하는 방식.
+    * 복사된 인자는 함수 안에서 지역적으로 사용된다.
+    * 따라서 함수 안에서 인자의 값이 변경되어도, 호출때 매개변수로 사용된 외부의 값은 변경되지 않는다.
+    * Java의 경우 데이터 타입에 따라 함수 호출 방식이 달라진다.
+      * primitive type (원시타입): call by value로 동작 (int, short, long, float, double, char, boolean)
+      * reference type (참조타입): call by reference처럼 동작. (배열, 객체 인스턴스)
+  * call by reference
+    * 함수 호출시 인자로 전달되는 변수의 참조값을 전달하는 방식 (ex. c언어에서 포인터를 매개변수로 넘기는 것)
+    * 따라서 함수 안에서 인자의 값이 변경되면, 호출때 매개변수로 사용된 외부의 값도 함께 변경된다.
+  * Java는 call by value다.
+    * 객체의 주소 값을 직접 넘기지 않고, 객체 주소를 바라보는 또 다른 변수를 복사해 만들어서 넘긴다.
+      * 인스턴스에 접근하는 참조 값을 저장하는 변수를 넘기는 것.
+    * Java uses only call by value while passing reference variables as well. It creates a copy of references and passes them as valuable to the methods.
+</details>
+
+#### Q. 리플렉션이란?
+<details>
+  <summary>답변</summary>
+  
+  * 리플렉션이란?
+    * 컴파일되고 실행되면서 Class Loader에 의해 Method 영역에 로딩되있는 클래스의 메타데이터를 이용해 런타임 시점에 해당 클래스의 인스턴스를 생성하거나 멤버에 접근할 수 있도록 해주는 자바 API이다.
+    * 이 모든 것을 런타임에 할 수 있다.
+    * It allows an executing Java program to examine or "introspect" upon itself, and manipulate internal properties of the program. For example, it's possible for a Java class to obtain the names of all its members and display them.
+  * 대표적 사용 예시
+    * Component Scan (클래스의 애노테이션을 스캔하기 위해 클래스 메타 데이터를 이용하기 위함)
+</details>
+
+#### Q. 리플렉션 사용시 주의할 점
+<details>
+  <summary>답변</summary>
+  
+  1. 지나친 사용은 성능 이슈를 야기할 수 있다. 반드시 필요한 경우에만 사용할 것을 추천한다.
+     * Component Scan처럼 프로그램 실행시 한 번만 하면 되는 경우에만 사용하는 것이 좋다.
+  2. 컴파일 타임에 확인되지 않고 런타임 시에만 발생하는 문제를 만들 가능성이 있다.
+  3. 접근 지시자를 의도적으로 무시할 수 있기 때문에 자칫하면 보안적 이유가 발생할 수 있다.
+</details>
+
+#### Q. 동기화(synchronized) vs 비동기화(asynchronized)
+
 
 <br>
 
