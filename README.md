@@ -72,6 +72,17 @@
     * 멀티 스레드를 지원한다.
 </details>
 
+#### Q. 자바를 사용한 이유는?
+<details>
+  <summary>답변</summary>
+  
+  * 가장 대표적인 객체지향언어. (확장, 유지보수면에서 유리하다)
+  * 메모리를 직접 관리하지 않아도 되는 Managed 언어. (시간 단축, 편의성)
+  * 플랫폼과 독립적인 언어.
+  * 언어 차원에서 스레드를 지원해준다.
+  * 높은 점유율과 오랜 역사. 문서화.
+</details>
+
 #### Q. Primitive Type vs Wrapper class
 <details>
   <summary>답변</summary>
@@ -205,13 +216,15 @@
   * 더 자세한 내용은 [여기](http://homoefficio.github.io/2019/10/03/Java-Optional-%EB%B0%94%EB%A5%B4%EA%B2%8C-%EC%93%B0%EA%B8%B0/)를 참고
 </details>
 
-#### Q. java의 main 메서드가 static인 이유 - 미완
+#### Q. java의 main 메서드가 static인 이유
 <details>
   <summary>답변</summary>
-  <ul>
-    <li></li>
-    <li></li>
-  </ul>
+  
+  * **생명주기**
+    * JVM상 static이 가장 먼저 메모리에 올라간다. 제일 마지막에 수거된다.
+    * **main메서드의 경우 어떤 객체 생성보다도 가장 먼저 실행되어야하기 때문에 static으로 선언되어야 한다.**
+  * 어디서든 접근이 가능해야함
+    * static으로 해야 어디서든 접근이 가능하기 때문.
 </details>
 
 #### Q. java의 non-static와 static의 차이
@@ -260,10 +273,10 @@
 <details>
   <summary>답변</summary>
   
-  * 컴파일 타임때 런타임때 실행되는 타입의 안정성을 제공하기 위해.
-  * 자바는 데이터 바인딩에 공변성의 특징을 가지기 때문에, 버그 가능성이 있습니다. 따라서, 컴파일 타임에 런타이에 사용되는 타입을 검증을 하기 위함이다.
-    * `<Object>`: Object만을 받아 들인다.
-    * `<? extends Object>`: Object를 상속받은 객체를 받아 들인다.
+  * 컴파일 타임때 런타임때 실행되는 **타입의 안정성**을 제공하기 위해.
+  * 자바는 데이터 바인딩에 **공변성**의 특징을 가지기 때문에, 버그 가능성이 있습니다. 따라서, 컴파일 타임에 런타임에 사용되는 타입을 검증을 하기 위함이다.
+    * **`<Object>`: Object만을 받아 들인다.**
+    * **`<? extends Object>`: Object를 상속받은 객체를 받아 들인다.**
 </details>
 
 #### Q. 오버로딩과 오버라이딩의 차이
@@ -446,12 +459,14 @@
 <details>
   <summary>답변</summary>
   
+  * 다른 점
+    * **컴파일 때 예외처리 여부**
   * Checked Exception 
-    * 프로그래머가 별도의 예외처리를 하지 않으면 컴파일 단계에서 오류를 발생시키는 예외.
+    * 프로그래머가 별도의 **예외처리를 하지 않으면** 컴파일 단계에서 오류를 발생시키는 예외.
     * 비관적인 예외처리 기법이라 불린다.
     * ex. SQLException, IOException
   * Unchecked Exception
-    * 프로그래머가 별도의 예외처리를 하지 않아도 컴파일 단계에서 오류를 발생시키지 않는 예외.
+    * 프로그래머가 별도의 **예외처리를 하지 않아도** 컴파일 단계에서 오류를 발생시키지 않는 예외.
     * 낙관적인 예외처리 기법이라 불린다.
     * ex. NPE, RuntimeException
 </details>
@@ -460,8 +475,8 @@
 <details>
   <summary>답변</summary>
   
-  * 자칫 잘못하면 한 메서드를 사용하는 모든 메서드가 무책임하게 `throws`로 예외를 던지는 문제가 발생한다.
-  * OCP를 위반하게 될 수도 있다.
+  * 자칫 잘못하면 **한 메서드를 사용하는 모든 메서드가 무책임하게 `throws`로 예외를 던지는 문제**가 발생한다.
+  * OCP를 위반하게 될 수도 있다. -> 캡슐화가 안된다.
     * 특정 클래스에 의존하는 다른 클래스들로 예외 시그니처가 전달되고, 그로인해 발생하는 결합도가 유지보수성에 악영향을 끼친다.
     * 즉, **모든 상위 메서드들이 최하위 메서드의 예외 시그니처를 알아야 하므로 캡슐화가 깨진다.**
   * 예외를 `throw`한 메서드와 **depth가 3만 멀어져도 이 예외의 발생 근원지를 추측하기가 어려워진다.**
@@ -470,6 +485,8 @@
     * 각 클래스, 메서드의 시그니처가 아주 명확해야 한다는 의견이다.
     * 즉, **예외 가능성이 있는 메서드가 Unchecked Exception을 사용하는 것은 클라이언트를 속인다는 것!**
     * 하지만, 개인적으로 Unchecked를 사용하고, 문서화를 하는 것이 좋아보인다.
+  * Checked Exception 지양한 예시
+    * SQLException -> DataAccessException
 </details>
 
 #### Q. 업캐스팅과 다운캐스팅
@@ -503,6 +520,18 @@
     * 런타임에 성격이 결정된다.
       * 변수의 경우 동적 할당(ex. python, kotlin). 런타임에 타입이 결정됨.
       * 메서드의 경우, 호출되는 메서드가 런타임에 결정된다.
+</details>
+
+#### Q. Collection vs Collections
+<details>
+  <summary>답변</summary>
+  
+  * Collection
+    * **컬렉션 프레임워크의 루트 인터페이스.**
+    * `List`, `Set`, `Queue`등은 모두 `Collection` 인터페이스를 상속한다. 
+    * 하지만, **`map` 인터페이스는 단순히 값을 배열로 저장하는 `List`, `Set`과 다르게 키:값으로 저장하기 때문에, `Collection` 인터페이스를 상속받지 않는다.** 그저 컬렉션 프레임워크에 같이 정의만 되어있다.
+  * Collections
+    * **컬렉션을 대상으로 하는 정렬, 검색, 최소, 최대값검색 등을 지원하는 유틸성 객체이다.**
 </details>
 
 #### Q. String vs StringBuffer vs StringBuilder
@@ -586,8 +615,8 @@
   <summary>답변</summary>
   
   * 접근 제어자란?
-    * 클래스나 멤버 선언 시 부가적인 의미를 부여하는 키워드.
-    * 객체지향의 정보 은닉을 위해 사용된다.
+    * 클래스나 멤버 선언 시 **부가적인 의미를 부여하는 키워드**.
+    * **객체지향의 정보 은닉**(캡슐화)을 위해 사용된다.
   * 종류
     * public: 외부에 전체 공개되며, 어디에서나 접근할 수 있다.
     * protected: 같은 패키지 혹은 다른 패키지에서 해당 클래스를 상속한 클래스에서 접근 가능하다.
@@ -608,6 +637,34 @@
     * 로그 레벨을 설정할 수 있다.
     * 로그를 시스템 콘솔 외에도 파일이나 특정 서버로 보낼 수 있다. (저장 가능)
     * 비동기적으로 동작하도록 만들 수 있다. (성능상 좋음)
+</details>
+
+#### Q. 직렬화 / 역직렬화의 차이
+<details>
+  <summary>답변</summary>
+  
+  * 직렬화
+    * **객체 -> 스트림** (전송혹은 저장하기 위함)
+    * 데이터 구조나 객체 상태를 동일하거나 다른 컴퓨터 환경(파일이나 메모리 버퍼, 혹은 네트워크 전송)에 저장또는 전송할 수 있도록 변환하는 과정.
+    * **객체들의 데이터를 전송하거나 저장하기 위해 연속적인 데이터(바이트)로 변환시키는 과정.**
+  * 역직렬화
+    * **스트림 -> 객체** (전송 혹은 저장된 것을 다시 객체로 사용하기 위함)
+    * 직렬화된 데이터를 다시 객체의 형태로 변환시키는 과정.
+    * **데이터 전송 혹은 저장하기 위해 연속적인 데이터로 변환된 데이터를 다시 객체의 형태로 복원하는 과정.**
+</details>
+
+#### Q. 깊은 복사와 얕은 복사
+<details>
+  <summary>답변</summary>
+  
+  * 얕은 복사 : 객체의 저장된 멤버들을 그대로 복사한다.
+    * 객체안에 저장된 멤버중 참조하고 있는 객체는 복제되지 않는다.
+    * 참조변수만 복제되고, 힙에 저장되어 있는 객체는 그대로 남아 있는다.
+    * 원본을 변경하면 복사본도 영향을 받는다. ( 힙에 저장된 객체는 그대로이기 때문에 )
+  * 깊은 복사 : 객체의 저장된 멤버들의 참조하고 있는 객체까지 복제한다.
+    * 객차안에 저장된 멤버중 참조하고 있는 객체까지 복제한다.
+    * 참조변수도 복제하고, 힙에 저장되어 있는 객체까지 복제한다. ( new를 통해 인스턴스화 )
+    * 원본의 변경이 복사본의 영향을 끼치지 못한다. ( 힙에 저장된 객체가 서로 다르기 때문 )
 </details>
 
 <br>
@@ -634,10 +691,10 @@
 <details>
   <summary>답변</summary>
   
-  1. JAVA 소스 코드 파일 (.java)를 JAVA 컴파일러 (javac)로 바이트 코드(.class)로 변환한다.
-  2. JVM 내에 있는 Class Loader가 runtime data area로 바이트 코드 파일을 적재한다.
+  1. JAVA 소스 코드 파일 (.java)를 JAVA 컴파일러 (javac)로 바이트 코드(.class)로 **변환한다**.
+  2. JVM 내에 있는 Class Loader가 runtime data area로 바이트 코드 파일을 **적재한다**.
      * Loading -> Linking -> Initializing
-  3. JVM 내에 있는 execution engine(Interpreter, JIT Compiler, GC)이 runtime data area에 적재된 바이트 코드를 기계어로 변경해 명령어 단위로 실행한다.
+  3. JVM 내에 있는 execution engine(Interpreter, JIT Compiler, GC)이 runtime data area에 적재된 바이트 코드를 기계어로 변경해 명령어 단위로 **실행한다**.
   
   > 더 자세한 내용은 [여기](https://github.com/binghe819/TIL/blob/master/JAVA/JVM/jvm_structure.md)
 </details>
@@ -703,11 +760,12 @@
   <summary>답변</summary>
   
   * 리플렉션이란?
-    * 컴파일되고 실행되면서 Class Loader에 의해 Method 영역에 로딩되있는 클래스의 메타데이터를 이용해 런타임 시점에 해당 클래스의 인스턴스를 생성하거나 멤버에 접근할 수 있도록 해주는 자바 API이다.
+    * 컴파일되고 실행되면서 Class Loader에 의해 Method 영역에 로딩되있는 클래스의 **메타데이터**를 이용해 런타임 시점에 해당 클래스의 인스턴스를 생성하거나 멤버에 **접근할 수 있도록 해주는 자바 API**이다.
     * 이 모든 것을 런타임에 할 수 있다.
     * It allows an executing Java program to examine or "introspect" upon itself, and manipulate internal properties of the program. For example, it's possible for a Java class to obtain the names of all its members and display them.
   * 대표적 사용 예시
-    * Component Scan (클래스의 애노테이션을 스캔하기 위해 클래스 메타 데이터를 이용하기 위함)
+    * **Component Scan** (클래스의 애노테이션을 스캔하기 위해 클래스 메타 데이터를 이용하기 위함)
+    * 다이나믹 프록시 (Method 이름)
 </details>
 
 #### Q. 리플렉션 사용시 주의할 점
@@ -783,7 +841,7 @@
     * 예시
       * JDBC
   * [LSP (Liskov Substitution Priciple)](https://github.com/binghe819/TIL/blob/master/OOP&%EC%84%A4%EA%B3%84/SOLID/LSP.md)
-    * 상위 타입의 객체를 하위 타입의 객체로 치환해도 상위 타입을 사용하는 프로그램은 정상적으로 동작해야 한다는 원칙
+    * **상위 타입의 객체를 하위 타입의 객체로 치환해도 상위 타입을 사용하는 프로그램은 정상적으로 동작해야 한다는 원칙**
       * B가 A의 자식 타입이면, 부모 타입인 A객체는 자식 타입인 B로 치환해도, 기존 동작엔 문제가 없어야 한다는 원칙.
       * A - B의 부모 자식에 대한 정의가 논리적으로 제대로 된 상속이어야 기존 프로그램이 자식인 B로 치환해도 문제 없이 작동해야 한다는 의미
     * 부모에서 구현한 원칙을 자식도 따라야한다는 원칙.
@@ -799,6 +857,9 @@
   * [DIP (Dependency Inversion Principle)](https://github.com/binghe819/TIL/blob/master/OOP&%EC%84%A4%EA%B3%84/SOLID/DIP.md)
     * **추상화된 것은 구체적인 것에 의존하면 안된다는 원칙. 구체적인 것이 추상화된 것에 의존해야한다.**
     * **고차원 모듈은 저차원 모듈에 의존하면 안된다.** 이 두 모듈 모두 다른 추상화 된 것에 의존해야 한다는 원칙.
+    * 의존성 역전이란
+      * 기존엔 고수준 모듈이 직접 사용하고자 하는 객체를 생성하면 의존성이 역전된다고 볼 수 없다.
+      * 반면에, 고수준 모듈이 추상적인 것에 의존하고, 외부에서 주입받음으로써 사용하기 때문에 의존성이 역전된다. 즉, 고수준 모듈이 자기가 사용하는 객체를 외부에서 주입해주는 것에 의존하기 때문에 의존성 역전이라한다.
     * 예시
       * **카드 결제라는 고차원 모듈이 있다면, 카드 결제 컨트롤러에선 신한 카드 결제에 의존하지 말고, 카드 결제라는 추상적인 것에 의존해야 한다.**
       * 그리고 신한 카드 결제 혹은 다른 카드 결제들은 모두 카드 결제라는 모듈을 구현하는 저차원 모듈이다. (세부사항이다.)
@@ -898,10 +959,303 @@
   * [여기](https://github.com/binghe819/TIL/blob/master/OOP&%EC%84%A4%EA%B3%84/%EA%B8%B0%ED%83%80/%EC%9B%90%EC%8B%9C%EA%B0%92%20%ED%8F%AC%EC%9E%A5%EA%B3%BC%20VO.md#3-%EC%9B%90%EC%8B%9C%EA%B0%92-%ED%8F%AC%EC%9E%A5%EA%B3%BC-vo%EC%9D%98-%EC%B0%A8%EC%9D%B4)를 참고
 </details>
 
+#### Q. 전략 패턴 vs 프록시 패턴 - 예정
+<details>
+  <summary>답변</summary>
+  
+  * 
+</details>
+
 <br>
 
 ### 디자인 패턴
 
+<br>
+
+## Spring
+
+#### Q. 스프링이 무엇인가요?
+<details>
+  <summary>답변</summary>
+  
+  * 스프링은 **자바 엔터프라이즈 개발을 위한 오픈소스 애플리케이션 프레임워크**입니다.
+  * 스프링은 **자바를 이용한 동적인 웹 사이트를 개발하기 위해 여러가지 추상화 서비스를 제공하는 애플리케이션 프레임워크.**
+  * 스프링의 핵심 요소
+    * 애플리케이션 개발시 오직 애플리케이션 레벨의 **비즈니스 로직에만 집중할 수 있도록 다양한 서비스 인프라**를 지원한다. (**애플리케이션 레벨에서의 인프라를 지원**)
+</details>
+
+#### Q. 프레임워크가 무엇인가요? 라이브러리와의 차이점은?
+<details>
+  <summary>답변</summary>
+  
+  * **제어**
+    * 라이브러리 (능동)
+      * 라이브러리를 사용하는 코드는 애플리케이션 흐름을 직접 제어한다.
+      * **개발자가 라이브러리 코드를 호출하여 전체적인 코드의 흐름을 주도한다.**
+    * 프레임워크 (수동) - **제어의 역전**
+      * 프레임워크는 거꾸로 코드가 프레임워크에 의해 사용된다.
+      * **개발자는 프레임워크 흐름중 핵심 부분만 작성하고 프레임워크가 전체적인 흐름을 주도한다.**
+  * 목적
+    * 둘 다 목적은 코드의 재사용성과 편의성.
+    * 라이브러리는 재사용성에 더 집중하고, 프레임워크는 기본적인 틀을 제공해주는 것에 집중한다.
+</details>
+
+#### Q. 스프링을 왜 사용하나요?
+<details>
+  <summary>답변</summary>
+  
+  * **문서화**
+    * 자바진영에서 가장 보편화된 프레임워크. **문서화**가 잘 되어 있다.
+  * **개발 편의성, 생산성**
+    * **비즈니스 로직**에만 집중할 수 있도록 다양한 **애플리케이션 레벨에서의 인프라**를 갖추고 있다. 개발자는 비즈니스 로직에만 집중하면 된다.
+    * ex. IoC, AOP, PSA
+  * **비침투성 - POJO** (관심사 분리)
+    * 비침투성을 지향하기 때문에, **기존의 도메인 부분에 대한 자바 코드를 최대한 건드리지 않고 웹 서비스를 할 수 있다**.
+    * ex. 우아한 테크코스 체스 미션 -> 처음엔 콘솔에서만 동작하도록 했음. -> 웹 서비스를 위해 스프링을 적용시키면서 기존의 도메인 코드는 변경이 별로 발생하지 않음.
+</details>
+
+#### Q. 스프링 핵심 원칙
+<details>
+  <summary>답변</summary>
+  
+  * 스프링의 핵심 원칙은 세 가지다. IoC/DI, AOP, PSA
+  * IoC
+    * **Inversion Of Control** (제어의 역전)을 의미하며, **객체의 생성과 생명주기 관리까지 모든 객체에 대한 제어권을 개발자가 아닌 프레임워크에게 위임**한 것을 의미한다.
+    * **객체의 생성 책임을 개발자가 가지는 것이 아니라, 프레임워크에 위임했다.** (능동 -> 수동)
+  * DI
+    * DI는 **의존관계 주입**을 의미한다. 의존관계란 하나의 객체가 다른 객체의 상태에 따라 영향을 받는 것을 의미한다.
+    * 스프링에서는 이러한 **의존관계를 개발자가 직접 관리하지 않고, 스프링 컨테이너에서 관리**한다. 의존관계가 필요할 때마다 **스프링 컨테이너에서 개발자 코드안으로 의존성을 주입해준다.**
+    * DI는 스프링에서 IoC를 구현한 한가지 방법이며, **IoC는 DI를 포함하는 개념이다**.
+    * 이를 통해 개발자는 **객체의 생성, 생명주기 관리, 의존관계 설정 책임**을 신경쓸 필요없이 **자신의 비즈니스 로직에만 집중**하여 생산성을 높일 수 있다.
+  * AOP
+    * Aspect-Oriented Programming (관점 지향 프로그래밍)을 의미한다.
+    * 스프링 DI가 의존성에 대한 주입이라면 AOP는 로직(code)주입이라고 할 수 있다.
+    * 관점 지향은 쉽게 말해 **어떤 로직을 핵심적인 관점과 부가적인 관점으로 나누어서 보고 그 관점을 기준으로 각각 모듈화**하겠다는 것이다.
+      * 핵심적인 관점: 비즈니스 로직
+      * 부가적인 관점: 핵심 로직을 실행하기 위해서 행해지는 로직 (로깅, 트랜잭션, 캐싱) - 재사용된다.
+  * PSA
+    * Portable Service Abstraction (일관성 있는 서비스 추상화) 을 의미한다.
+    * 서비스 추상화란, **같은 일을 하는 다수의 기술을 공통의 인터페이스로 제어할 수 있게 하는 것**을 의미한다.
+    * **외부 환경의 변화에 관계없이 일관된 방식으로 기술에 접근할 수 있게 해주는 것을 의미한다.**
+    * 예시
+      * `@Cacheable`: 캐시대상으로 redis를 사용하던 ehcache를 사용하던 @Cacheable을 처리하는 내부 코드는 변하지 않는다.
+      * `@Transactional`: JPA의 구현체로 hibernate를 이용하던 다른 구현체를 이용하던 @Transactional을 처리하는 내부 코드를 변경할 필요가 없다.
+</details>
+
+#### Q. 생성자 주입을 추천하는 이유는?
+<details>
+  <summary>답변</summary>
+  
+  * **불변**
+    * 대부분의 의존관계 주입은 한번 일어나면 애플리케이션 종료시점까지 의존관계를 변경하지 않는 것이 좋다.
+    * 그 이유는 불변을 보장함으로써, 추후에 **발생할 수 있을 버그를 사전에 차단해 주는 효과**를 얻기 때문이다.
+  * **생성자 주입은 Setter의 단점을 모두 커버한다.**
+    * 객체를 만들 때 의존성을 주입해주지 않아도 생성이된다. -> NPE 발생 확률 존재.
+    * Setter 주입의 경우 상태가 **불변하지 않기 때문에 실수할 확률이 높다.** 
+  * **스프링에 의존적이지 않다.**
+    * 스프링 application context가 없어도 단독으로 테스트 혹은 도메인으로써의 역할을 수행할 수 있다.
+</details>
+
+#### Q. 필드 주입을 추천하지 않는 이유
+<details>
+  <summary>답변</summary>
+  
+  * 우선 스프링 공식문서에서도 추천하지 않는다.
+  * 스프링에 의존적인 코드가 된다. - 스프링은 기본적으로 비침투성(POJO)를 지향한다.
+    * 우선 필드 주입은 수정자(Setter)주입과 유사한 방식으로 동작한다.
+    * 또한, **필드 주입은 IoC 컨테이너에서 제공해주는 것이므로 컨테이너에 너무 의존적인 코드**가 된다.
+    * 만약 **테스트시 application context가 없다면 해당 객체는 테스트가 불가능하다.** (순수 자바 코드 단위 테스트 불가)
+</details>
+
+#### Q. servlet과 serlvet container
+<details>
+  <summary>답변</summary>
+  
+  * servlet
+    * **Java로 HTTP 요청 및 응답을 처리하기 위한 표준**
+    * 서블릿은 클라이언트의 http 요청을 받아 **비즈니스 로직을 수행하고, 적절한 http 응답을 생성하는 자바 객체**이다.
+    * 웹페이지를 동적으로 생성하는 역할.
+    * 서블릿은 일반 자바 객체와 달리 **서블릿 컨테이너 내에서만 실행**된다.
+  * servlet container
+    * 클라이언트로부터 **http 요청 메시지를 적절하게 파싱 후, 스레드를 생성하여 적절한 서블릿을 실행시키고, 서블릿으로 부터 응답받은 요청 처리 결과를 이용해 http 응답 메시지를 만들어주는 컴포넌트.**
+    * **웹 서비스에 필요한 다양한 기능을 제공하며, 개발자로 하여금 비즈니스 로직(serlvet 구현)만 집중할 수 있도록 도와주는 프레임워크**
+    * **지원하는 기능**
+      * tcp/ip 소켓 연결 및 종료. (통신 지원)
+      * http 요청 메시지 파싱 및 응답 메시지 생성.
+      * 서블릿 생명주기 관리 (서블릿의 탄생과 죽음을 관리)
+      * 멀티스레딩 지원 (요청당 스레드로 처리)
+      * 선언적인 보안 관리
+    * 대표적인 servlet container: tomcat, netty
+</details>
+
+#### Q. servlet container의 동작 흐름
+<details>
+  <summary>답변</summary>
+  
+  1. 사용자 **요청 파싱**
+  2. 새로운 **스레드를 생성**하고, **HttpServletRequest, HttpServletResponse 생성.**
+  3. 사용자 요청을 분석하여 **대응되는 서블릿 검색**. (DD.xml을 통해 서블릿을 미리 정의해둔다.)
+  4. 찾은 서블릿의 **`service()` 메서드 호출함으로써, 비즈니스 로직 처리 위임.**
+  5. **서블릿은 클라이언트에게 넘길 응답을 작성**. 이때 Response 객체를 사용한다.
+  6. servlet container가 서블릿으로부터 받은 **Response를 적절한 http response로 만들어 클라이언트에 반환**.
+  7. 요청을 처리한 **스레드는 소멸하거나 스레드 풀로 반환**.
+</details>
+
+#### Q. Bean이란
+<details>
+  <summary>답변</summary>
+  
+  * 스프링 **IoC Container에 의해 생성 및 관리되는 자바 객체**를 의미한다.
+    * 스프링 IoC Container에 의해 생명주기가 관리되는 자바 객체.
+    * 스프링의 핵심 원칙은 IoC/DI의 근간이 되는 개념.
+  * 스프링 IoC컨테이너에 의해서 관리되고 애플리케이션의 핵심을 이루는 객체들을 스프링에서는 빈즈(beans)라고 부른다.
+    * 빈은 스프링 **IoC컨테이너에 의해서 인스턴스화되어 조립되거나 관리되는 객체**를 말한다.
+    * **빈과 빈 사이의 의존성은 컨테이너가 사용하는 메타데이터 환경설정에 의존한다.**
+  * Bean의 주요 속성
+    * class: 정규화된 자바 클래스 이름
+    * id: bean의 고유 식별자
+    * scope: 빈 스코프
+    * constructor-arg: 생성 시 생성자에 전달할 인수
+    * property: 생성 시 bean setter에 전달할 인수
+    * init method와 destory method
+</details>
+
+#### Q. Java Bean vs Spring Bean
+<details>
+  <summary>답변</summary>
+  
+  * Java Bean
+    * 데이터 표현하는 것을 목적으로 하는 자바 클래스.
+    * 특별한 것 없고, 그저 아래 규약에 맞춰서 만든 클래스를 의미한다.
+      1. 기본생성자가 존재한다.
+      2. 모든 멤버변수의 접근제어자가 private이다.
+      3. 멤버변수마다 getter/setter가 존재한다.
+      4. 외부에서 멤버변수에 접근하기 위해서는 메서드로만 접근할 수 있다.
+      5. 직렬화가 가능해야한다.
+  * Spring Bean
+    * Spring Framework의 IoC Container에 의해 등록, 생성, 조회, 관계설정이 되는 객체를 의미한다.
+</details>
+
+#### Q. Bean Scope
+<details>
+  <summary>답변</summary>
+  
+  * singleton: 하나의 Bean 정의에 대해서 **스프링 IoC 컨테이너마다 단 하나의 객체만 존재**
+  * prototype: 하나의 Bean 정의에 대해서 **매 Bean을 찾는 요청마다 새로운 Bean을 생성.** (Ioc 컨테이너가 생명주기 관리를 아예 하지 않는다. 그저 팩토리 메서드)
+  * request: 하나의 Bean 정의에 대해서 하나의 HTTP Request의 생명주기 안에 단 하나의 객체만 존재. (각각의 요청마다 자신만의 객체를 가진다.)
+  * session: 하나의 Bean 정의에 대해서 하나의 HTTP Session의 생명주기 안에 단 하나의 객체만 존재.
+  * global session: 하나의 Bean 정의에 대해서 하나의 global HTTP Session의 생명주기 안에 단 하나의 객체만 존재.
+</details>
+
+#### Q. @Bean vs @Component
+<details>
+  <summary>답변</summary>
+  
+  * 공통점
+    * 둘 다 IoC 컨테이너에 빈으로 등록하기 위한 방법.
+  * 차이점
+    * **@Bean은 개발자가 컨트롤 불가능한 외부 라이브러리**를 등록할 경우 사용한다. (그저 생성만 지원한다.)
+    * **@Component를 개발자가 직접 컨트롤 가능한 클래스**를 등록할 경우 사용한다.
+</details>
+
+#### Q. Bean 등록 방법
+<details>
+  <summary>답변</summary>
+  
+  * XML을 이용한 빈 설정
+  * Component Scan을 이용한 빈 설정
+  * 자바 설정파일(`@Configuration`)을 이용한 빈 설정
+</details>
+
+#### Q. Bean 생명주기 - 예정
+<details>
+  <summary>답변</summary>
+  
+  * 
+</details>
+
+#### Q. @ComponentScan
+<details>
+  <summary>답변</summary>
+  
+  * **리플렉션 기술**을 활용하여 @Component 혹은 streotype 애노테이션이 붙은 **Class들을 자동으로 scan하여 Bean으로 등록해주는 역할**을 해주는 애노테이션.
+  * 스프링부트는 `@ComponentScan`이 붙은 패키지부터 Scan을 한다.
+</details>
+
+#### Q. ComponentScan 과정
+<details>
+  <summary>답변</summary>
+  
+  * 스프링 애플리케이션을 동작시키면, 스프링 IoC 컨테이너가 생성된다.
+  * 만약 `@ComponentScan`이 붙은 클래스가 있다면, 해당 클래스를 기준으로 하위 패키지에 등록된 모든 `@Component`가 붙은 클래스를 스캔한다.
+  * 이때, reflection api를 사용한다. (필자는 reflections 라이브러리를 이용하여 Class 파일을 스캔했다.)
+  * 스캔된 클래스를 IoC 컨테이너에 빈으로 등록한다.
+</details>
+
+#### Q. Spring 서버 부팅시 동작 과정 - 예정
+<details>
+  <summary>답변</summary>
+  
+  * 스프링의 경우
+    1. 톰캣이 실행된다. (톰캣을 통해 실행해야 함)
+    2. `ServletContextListener`의 스프링에서 제공하는 구현체인`ContextLoaderListener`에 의해 `Application Context`이 생성된다.
+    3. `Application Context`가 생성되는 과정에서, 빈 정의 (xml, 자바 설정 파일, component scan)에 의해 빈이 생성된다.
+    4. `Application Context`에 저장된 빈들의 의존 관계가 주입된다.
+    5. 빈들의 생명주기에 맞는 메서드가 실행된다. (빈의 초기화 메서드, 소멸 메서드 등등)
+  * 스프링 부트의 경우
+    1. 
+</details>
+
+#### Q. Thread Local
+<details>
+  <summary>답변</summary>
+  
+  * Thread Local이란
+    * 각 Thread마다 갖는 독립적인 지역 변수를 의미한다.
+    * Java.lang 패키지에서 제공하는 쓰레드 범위 변수. 한 스레드에서 공유할 변수.
+  * 특징
+    * 같은 쓰레드 내에서만 공유
+    * 따라서 같은 쓰레드라면 해당 데이터를 메서드 매개변수로 넘겨줄 필요 없다.
+  * 스프링에서의 사용처
+    * 트랜잭션 매니저에서 transaction Context를 전파하는데 사용된다.
+    * SpringSecurity에서는 ThreadLocal을 기본 전략으로 SecurityContextHolder를 사용한다.
+</details>
+
+#### Q. Spring MVC 동작 과정
+<details>
+  <summary>답변</summary>
+  
+  
+</details>
+
+#### Q. DispatcherServlet이란?
+<details>
+  <summary>답변</summary>
+  
+  * 
+</details>
+
+#### Q. Filter vs Interceptor
+<details>
+  <summary>답변</summary>
+  
+  * 공통점
+    * 둘 다 웹과 관련된 공통 관심 사항을 처리한다.
+  * 차이점
+    * 적용되는 순서와 범위, 사용방법이 다르다.
+    * Filter는 서블릿에서 제공하는 기술이며, 특정 Servlet이 실행하기 전에 발생한다. (ex. Dispatcher Server 이전)
+      * 예외처리: 스프링에서 제공하는 ExceptionHandler를 사용할 수 없다. 예외처리가 번거러움.
+      * Context: Filter는 Spring의 Context 밖에서 동작하기에, 스프링에서 제공하는 DI등을 사용할 수 없다. (물론 방법이 있음)
+      * 정보: 단순히 request, response 객체만 제공한다.
+      * 시점: `doFilter`만 제공.
+    * Interceptor는 스프링MVC에서 제공하는 기술이며, DispatcherServlet안에서 특정 핸들러들을 실행하기 전에 발생한다.
+      * 예외처리: 스프링에서 제공하는 ExceptionHandler등을 사용할 수 있다.
+      * Context: Spring의 Context 범위 내에서 동작하기에, 스프링에서 제공하는 DI등을 사용할 수 있다.
+      * 정보: request, response에 더해서 어떤 핸들러가 호출되는지에 대한 정보도 제공받는다.
+      * 시점: 핸들러 호출 전(`preHandle`), 호출 후 (`postHandle`), 요청 완료 이후(`afterCompletion`)을 제공.
+  * 실행 과정
+    * HTTP 요청 -> Servler Container -> Filter -> Servlet (Dispatcher Servlet) -> Interceptor -> Controller
+</details>
 
 <br>
 
