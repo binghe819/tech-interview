@@ -64,28 +64,38 @@
 <details>
   <summary>답변</summary>
 
+  ---
+
   * 자바는 제임스 고슬링과 다른 연구원들이 개발한 **객체 지향적 프로그래밍 언어**이다.
     * 엄밀히 말하면 멀티 패러다임 프로그래밍언어 (절차형, 함수형 모두 지원)
   * 특징
     * JVM (WORA) 가상머신 -> 운영체제와 독립적
     * GC라는 프로세스를 통해 자동으로 메모리 관리는 수행한다.
     * 멀티 스레드를 지원한다.
+
+  ---
 </details>
 
 #### Q. 자바를 사용한 이유는?
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 가장 대표적인 객체지향언어. (확장, 유지보수면에서 유리하다)
   * 메모리를 직접 관리하지 않아도 되는 Managed 언어. (시간 단축, 편의성)
   * 플랫폼과 독립적인 언어.
   * 언어 차원에서 스레드를 지원해준다.
   * 높은 점유율과 오랜 역사. 문서화.
+
+  ---
 </details>
 
 #### Q. Primitive Type vs Wrapper class
 <details>
   <summary>답변</summary>
+
+  ---
 
   * Wrapper Class를 사용하는 이유
     * Nullable
@@ -98,21 +108,29 @@
     * JVM은 상황에 따라 Boxing을 하기도, Unboxing을 하기도 한다.
     * [편리한 AutoBoxing의 단점](./JAVA/AutoBoxing/AutoBoxing의%20단점.md)
       * **Wrapper Class를 연산하면 오토박싱/언박싱이 일어나기에 비효율적이다.**
+
+  ---
 </details>
 
 #### Q. Generic은 왜 Wrapper Class만 사용한가?
 <details>
   <summary>답변</summary>
 
+  ---
+
   * 우선 Generic을 사용하는 가장 큰 이유가 타입 체크를 위함이다. 즉, 컴파일 타임시에만 타입 체크 및 제약을 적용하고, 자동 형변환을 해준다. 그리고 컴파일 된 .class 파일에는 실제로 제네릭 정보가 전혀 없다. (소거됨)
   * 다르게 말하면 런타임엔 Generic으로 주어진 타입으로 형변환 된 Object만이 존재할 수 있다. 그러기 때문에 Primitive 타입은 Object가 될 수 없기에 불가능한 것.
   * 쉽게 말하면 **Generic 특성상 Object로 Convertable한 타입만 가능하다.**
   * [참고 1](https://www.quora.com/Why-is-it-impossible-to-use-primitive-types-as-a-type-parameter-in-Java), [참고 2](https://stackoverflow.com/questions/2721546/why-dont-java-generics-support-primitive-types)
+
+  ---
 </details>
 
 #### Q. 생성자 vs 정적 팩토리 메서드
 <details>
   <summary>답변</summary>
+
+  ---
 
   * 생성자와 정적 팩토리 메서드의 차이는 정적 팩토리 메서드의 장단점으로 알 수 있다.
   * 정적 팩토리 메서드의 장점
@@ -124,28 +142,40 @@
   * 정적 팩토리 메서드의 단점
     * 상속하려면 public, protected 생성자가 필요하니, 정적 팩토리 메서드만 제공하면 하위 클래스를 만들 수 없다.
     * static 팩토리 메서드는 프로그래머가 찾기 어렵다.
+
+  ---
 </details>
 
 #### Q. String 객체는 객체인데 왜 new로 선언하지 않는가?
 <details>
   <summary>답변</summary>
 
+  ---
+
   * `String`은 대표적 **불변 객체**로, `String 상수 풀 영역`에서 객체를 관리한다.
   * 즉, 상수처럼 **이미 선언된 String 객체가 있으면 이 영역에서 가져다 사용하고, 없다면 여기에 새롭게 객체를 생성하여 사용한다.**
+
+  ---
 </details>
 
 #### Q. ""와 new String("")의 차이점은?
 <details>
   <summary>답변</summary>
   
+  ---
+
   * `""`은 Heap 내의 별도 공간인 `String 상수 풀 영역`에 문자열을 생성하고, 같은 문자열은 한번만 생성된다.
     * `String 상수 풀 영역`에 생성되는 String 객체는 불변이다.
   * `new String()`는 일반 클래스와 마찬가지로 Heap에 문자열 객체로 생성된다.
+
+  ---
 </details>
 
 #### Q. 불변 객체를 써야하는 이유
 <details>
   <summary>답변</summary>
+
+  ---
 
   * 불변 객체란?
     * 불변 객체란 **생성 후 그 상태를 변경할 수 없는 객체**를 말한다. 반대 개념으로 가변(mutable)객체가 있다.
@@ -162,11 +192,15 @@
     * `List`를 불변으로 해도, 그 요소가 불변이 아니면 언제든 가변이 될 수 있기 때문이다. 
   * 단점으로는 메모리 낭비를 유발할 수 있다는 것이다.
     * 단, 이것은 GC 커스텀을 통해 개선할 수 있을 듯 하다.
+
+  ---
 </details>
 
 #### Q. 불변 만드는 방법
 <details>
   <summary>답변</summary>
+
+  ---
 
   * 원시 타입에서의 불변
     * 원시 타입은 값을 그대로 외부로 내보내도 불변임을 보장한다.
@@ -177,11 +211,15 @@
     * **final + 방어적 복사 (생성자, Getter, 기타 반환 메서드)를 통해 참조 타입을 불변으로 만들 수 있다.**
     * **컬렉션을 불변으로 만들기 위해서는, 해당 컬렉션의 요소도 불변으로 만들어줘야한다.**
     * 더 자세한 내용은 [여기](https://github.com/binghe819/TIL/blob/master/JAVA/%EA%B8%B0%ED%83%80/%EB%B6%88%EB%B3%80%20%EA%B0%9D%EC%B2%B4.md)
+
+  ---
 </details>
 
 #### Q. 자바에서 null을 안전하게 다루는 방법은?
 <details>
   <summary>답변</summary>
+
+  ---
 
   * null의 정의
     * null은 값이 할당되지 않은 변수
@@ -199,11 +237,15 @@
     * `Optional`
     * JSR 305
     * JSR 308 (`@NonNull`, `@Nullable`)
+
+  ---
 </details>
 
 #### Q. Optional 사용시 주의할 점
 <details>
   <summary>답변</summary>
+
+  ---
 
   * 쉽게 요약하면, `Optional`은 최대 1개 원소를 가지는 특별한 Stream이라고 생각하고 사용하면 된다.
   * `isPresent()`를 사용하지 않는다. -> `orElse`, `orElseGet` 등을 사용하자.
@@ -214,33 +256,45 @@
   * Optional은 필드로 사용하면 안된다. 반환 값으로만 사용하자
   * Optional은 비싸다. 비어있는 컬렉션을 반환할 때는 Optional을 감싸지 말고, 빈 컬렉션을 반환하자.
   * 더 자세한 내용은 [여기](http://homoefficio.github.io/2019/10/03/Java-Optional-%EB%B0%94%EB%A5%B4%EA%B2%8C-%EC%93%B0%EA%B8%B0/)를 참고
+
+  ---
 </details>
 
 #### Q. java의 main 메서드가 static인 이유
 <details>
   <summary>답변</summary>
   
+  ---
+
   * **생명주기**
     * JVM상 static이 가장 먼저 메모리에 올라간다. 제일 마지막에 수거된다.
     * **main메서드의 경우 어떤 객체 생성보다도 가장 먼저 실행되어야하기 때문에 static으로 선언되어야 한다.**
   * 어디서든 접근이 가능해야함
     * static으로 해야 어디서든 접근이 가능하기 때문.
+
+  ---
 </details>
 
 #### Q. java의 non-static와 static의 차이
 <details>
   <summary>답변</summary>
 
+  ---
+
   * **non-static은 특정 객체의 대한 상태(동적 변수 혹은 인스턴스 변수)를 의미하고, static은 여러 객체가 공유하는 상태(정적 변수 혹은 클래스 변수)를 의미한다.**
   * non-static은 객체가 생성되고 할당되며, 해당 객체의 상태를 나타내며, static은 객체가 생성되지 않아도 할당되며, 모든 객체에서 사용 가능하다.
   * non-static 메서드에서는 static 변수와 메서드에 모두 접근 가능하지만, static 메서드에서는 non-static 변수와 메서드에 접근하지 못한다. (아직 생성되지 않았기에)
   * **생명주기가 다르다.** non-static은 인스턴스와 생명주기를 같이 하며, static은 프로그램과 생명주기를 같이한다.
   * 쉽게 얘기하면, **non-static은 인스턴스(객체)에 속하고, static은 클래스 자체에 속한다.**
+
+  ---
 </details>
 
 #### Q. java의 데이터 타입
 <details>
   <summary>답변</summary>
+
+  ---
 
   * 기본형 데이터 타입
     * 숫자형
@@ -255,11 +309,15 @@
     * 배열 타입
     * 열거 타입
     * 클래스, 인터페이스
+
+  ---
 </details>
 
 #### Q. Enum을 사용하는 이유는?
 <details>
   <summary>답변</summary>
+
+  ---
 
   * Enum이 나오게 된 이유는 [여기](https://github.com/binghe819/TIL/blob/master/JAVA/%EA%B8%B0%ED%83%80/%EC%97%B4%EA%B1%B0%ED%98%95(enum).md)참고
   * Enum 장점
@@ -267,22 +325,30 @@
     * 인스턴스 생성과 상속을 방지한다.
     * 상수를 의미할 뿐만 아니라, 객체처럼 사용할 수 있다. - 추가 속성, 메시지를 통한 자율성 보장등
   * Enum은 싱글톤 (하나만 생성하여 여러 객체가 나눠서 사용함)이며, new를 통해 생성할 수 없다.
+
+  ---
 </details>
 
 #### Q. Generic을 사용하는 이유
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 컴파일 타임때 런타임때 실행되는 **타입의 안정성**을 제공하기 위해.
   * 자바는 데이터 바인딩에 **공변성**의 특징을 가지기 때문에, 버그 가능성이 있습니다. 따라서, 컴파일 타임에 런타임에 사용되는 타입을 검증을 하기 위함이다.
     * **`<Object>`: Object만을 받아 들인다.**
     * **`<? extends Object>`: Object를 상속받은 객체를 받아 들인다.**
+
+  ---
 </details>
 
 #### Q. 오버로딩과 오버라이딩의 차이
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 오버로딩: 재구성
     * 한 클래스 내에 같은 이름의 메서드를 여러 개 정의하는 것.
     * 단, 기존 메서드와 매개변수의 개수 또는 타입이 달라야한다.
@@ -290,20 +356,28 @@
   * 오버라이딩: 재정의
     * 인터페이스 혹은 상위 클래스의 메서드를 재정의.
     * 기존의 메서드를 재정의하는 것.
+
+  ---
 </details>
 
 #### Q. try-with-resource
 <details>
   <summary>답변</summary>
   
+  ---
+
   * JAVA 7부터 지원하는 기능
   * `Closeable`을 구현하고 있는 객체만이 사용 대상이 될 수 있다. **리소스에 대한 자동 반납 기능을 지원한다.**
+
+  ---
 </details>
 
 #### Q. Stream이란? 장점과 특징은?
 <details>
   <summary>답변</summary>
   
+  ---
+
   * Stream이란?
     * 자바 8에서 추가한 **스트림은 람다를 활용할 수 있는 기술** 중 하나이다.
     * **컬렉션, 배열 등에 저장된 요소들에 쉽게 접근할 수 있도록 추상화된 기술을 제공한다.**
@@ -322,20 +396,28 @@
     * 생성
     * 중간 연산
     * 최종 연산
+
+  ---
 </details>
 
 #### Q. Stream에서 map과 flatmap의 차이는?
 <details>
   <summary>답변</summary>
   
+  ---
+
   * map은 단일 스트림 안의 요소를 원하는 특정 형태로 변환시켜주는 중간 연산 메서드.
   * flatmap은 스트림의 형태(요소)가 배열이나 리스트일 때 각 리스트의 모든 원소를 특정 형태로 변환하고 단일 원소 스트림으로 반환시켜주는 중간 연산 메서드.
+
+  ---
 </details>
 
 #### Q. 함수형 프로그래밍 개념과 특징
 <details>
   <summary>답변</summary>
-  
+
+  ---
+
   * 함수형 프로그래밍
     * 함수를 값으로 바라보고 명령형이 아닌 선언형으로 프로그래밍 하는 프로그래밍 방식을 말한다.
   * 명령형과 선언형
@@ -375,12 +457,16 @@
     * 높은 수준의 추상화를 지원한다. 개발자는 How보다는 What에 집중할 수 있다. (핵심 가치에 집중 가능)
     * 함수 단위의 코드 재사용이 수월하다.
     * 불변이기에 코드를 예측하기 쉽다.
+
+  ---
 </details>
 
 #### Q. Lambda식이란?
 <details>
   <summary>답변</summary>
   
+  ---
+
   * Lambda식이란
     * **람다식은 메서드(함수)를 하나의 '식(expression)'으로 표현한 것**이다
     * **메서드로 전달할 수 있는 익명 클래스 메서드를 단순화 한 것.**
@@ -390,12 +476,16 @@
   * 장점
     * 불필요한 코드를 줄여주고, 가독성을 높여준다.
     * 익명 클래스와는 다르게 클래스를 생성하지 않는다.
+
+  ---
 </details>
 
 #### Q. 익명 클래스 vs 람다식
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 둘의 차이점은 바이트 코드를 보면 쉽게 파악할 수 있다.
   * 익명 내부 클래스는 새로운 클래스를 생성하지만, 람다는 새로운 메서드를 생성하여 포함한다.
     * 익명 내부 클래스
@@ -414,23 +504,31 @@
   * 람다도 일종의 클로저다.
     * 클로저: 함수 범위 밖의 자유변수를 참조할 수 있는 함수
     * 람다가 람다식 범위 밖의 변수에 접근하고자 한다면, 해당 변수는 `final`이어야 한다.
+
+  ---
 </details>
 
 #### Q. 함수와 메서드의 차이
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 근본적으로 동일. 함수는 일반적 용어, 메서드는 객체지향개념 용어
   * 함수는 클래스에 독립적
     * 함수(람다식)는 이 모든 과정없이 오직 함수(람다식) 자체만으로도 이 메서드의 역할을 수행할 수 있다.
   * 메서드는 클래스에 종속적
     * 모든 메서드는 클래스에 포함되어야하므로 클래스도 새로 만들어야 한다.
+
+  ---
 </details>
 
 #### Q. Java 8에 추가된 기능
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 추가된 기능
     * 가장 크게 추가된 부분은 Java에서 함수형 프로그래밍을 지원하기 시작. (람다, 스트림)
     * LocalDate, LocalDateTime 클래스가 새로 생김.
@@ -438,12 +536,16 @@
       * LocalDate와 LocalDateTime은 이러한 문제를 해결했다.
     * 인터페이스에 default 메서드 정의 가능해짐.
     * Optional
+
+  ---
 </details>
 
 #### Q. ==과 equals()의 차이점은?
 <details>
   <summary>답변</summary>
   
+  ---
+
   * `==` : 동일성
     * `==`은 primitive면 값 비교, reference이면 주소 비교를 통해 boolean 값을 리턴한다.
   * `equals()` : 동등성
@@ -453,12 +555,16 @@
     * `HashMap`과 `HashTable`에서 key에 대한 중복 여부를 `equals()`와 `hashCode()`로 하기 떄문에, 둘 다 재정의해줘야한다.
     * `hashCode()`를 재정의할 땐, 해당 객체의 상태를 통해 해시값을 계산해야한다.
   * [더 자세한 내용](https://github.com/binghe819/TIL/blob/master/JAVA/Effective%20Java/item11.md)
+
+  ---
 </details>
 
 #### Q. Checked Exception vs Unchecked Exception
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 다른 점
     * **컴파일 때 예외처리 여부**
   * Checked Exception 
@@ -469,12 +575,16 @@
     * 프로그래머가 별도의 **예외처리를 하지 않아도** 컴파일 단계에서 오류를 발생시키지 않는 예외.
     * 낙관적인 예외처리 기법이라 불린다.
     * ex. NPE, RuntimeException
+
+  ---
 </details>
 
 #### Q. Checked Exception을 지양하는 이유는?
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 자칫 잘못하면 **한 메서드를 사용하는 모든 메서드가 무책임하게 `throws`로 예외를 던지는 문제**가 발생한다.
   * OCP를 위반하게 될 수도 있다. -> 캡슐화가 안된다.
     * 특정 클래스에 의존하는 다른 클래스들로 예외 시그니처가 전달되고, 그로인해 발생하는 결합도가 유지보수성에 악영향을 끼친다.
@@ -487,12 +597,16 @@
     * 하지만, 개인적으로 Unchecked를 사용하고, 문서화를 하는 것이 좋아보인다.
   * Checked Exception 지양한 예시
     * SQLException -> DataAccessException
+
+  ---
 </details>
 
 #### Q. 업캐스팅과 다운캐스팅
 <details>
   <summary>답변</summary>
-  
+
+  --- 
+
   * `캐스팅 == 형변환`
   * 업캐스팅
     * **하위 클래스의 객체가 상위 클래스 타입으로 형변환 되는 것.**
@@ -502,12 +616,16 @@
     * **자신의 고유한 특성을 잃은 하위 클래스의 객체를 다시 복구시켜주는 것을 의미한다.**
     * 즉, 업캐스팅된 것을 다시 원상태로 돌리는 것.
     * **주의 할점은 업캐스팅이 선행되어야 하며, 명시적으로 타입을 지정해줘야한다.**
+
+  ---
 </details>
 
 #### Q. 정적 바인딩 vs 동적 바인딩이란
 <details>
   <summary>답변</summary>
-  
+
+  ---
+
   * 바인딩
     * 프로그램 구성 요소의 성격을 결정해주는 것.
     * ex. 변수의 데이터 타입이 무엇인지 정해지는 것.
@@ -520,24 +638,32 @@
     * 런타임에 성격이 결정된다.
       * 변수의 경우 동적 할당(ex. python, kotlin). 런타임에 타입이 결정됨.
       * 메서드의 경우, 호출되는 메서드가 런타임에 결정된다.
+
+  ---
 </details>
 
 #### Q. Collection vs Collections
 <details>
   <summary>답변</summary>
-  
+
+  ---
+
   * Collection
     * **컬렉션 프레임워크의 루트 인터페이스.**
     * `List`, `Set`, `Queue`등은 모두 `Collection` 인터페이스를 상속한다. 
     * 하지만, **`map` 인터페이스는 단순히 값을 배열로 저장하는 `List`, `Set`과 다르게 키:값으로 저장하기 때문에, `Collection` 인터페이스를 상속받지 않는다.** 그저 컬렉션 프레임워크에 같이 정의만 되어있다.
   * Collections
     * **컬렉션을 대상으로 하는 정렬, 검색, 최소, 최대값검색 등을 지원하는 유틸성 객체이다.**
+
+  ---
 </details>
 
 #### Q. String vs StringBuffer vs StringBuilder
 <details>
   <summary>답변</summary>
-  
+
+  ---  
+
   * String은 불변, 나머지 둘은 가변
     * String은 불변이므로 지정된 문자열을 변경할 수 없다.
     * 나머지 둘은 변경이 가능하다.
@@ -546,12 +672,16 @@
   * StringBuffer와 StringBuilder의 차이점
     * StringBuffer는 equals 메서드를 오버라이딩하지 않는다.
     * StringBuilder는 StringBuffer에서 스레드 동기화 기능만 뺀 클래스이다. 멀티 스레드가 아니라면 StringBuilder가 더 효율적이다.
+
+  ---
 </details>
 
 #### Q. HashMap vs HashTable vs ConcurrentHashmap
 <details>
   <summary>답변</summary>
-  
+
+  ---
+
   * 공통점
     * 모두 Map 인터페이스를 구현한 구현체이며, `key:value` 구조를 가진 자료구조다.
   * thread-safe
@@ -561,36 +691,48 @@
   * null 허용
     * HashMap은 key, value에 null을 허용한다.
     * HashTable과 ConcurrentHashMap은 key, value에 null을 허용하지 않는다.
+
+  ---
 </details>
 
 #### Q. HashMap vs TreeMap vs LinkedHashMap
 <details>
   <summary>답변</summary>
-  
+
+  ---
+
   * 조회
     * HashMap은 Hashing을 사용하여 데이터를 저장하기 때문에 조회시 O(1)이다.
     * TreeMap은 내부적으로 Red-Black 트리를 사용해 데이터를 저장하기 때문에 조회시 O(logN)이다.
   * 데이터 순서
     * HashMap은 데이터의 순서가 보장되지 않는다.
     * TreeMap과 LinkedHashMap은 데이터의 순서를 보장한다.
+
+  ---
 </details>
 
 #### Q. java.util.Stack이 잘못된 이유
 <details>
   <summary>답변</summary>
-  
+
+  ---
+
   * Stack의 문제점
     1. Vector를 상속받는다. Vector는 LIFO가 아닌 중간에 데이터 삽입, 삭제 연산도 가능하기 때문에 Stack의 본질에서 벗어난다.
     2. Stack은 synchronized 키워드로 thread-safe를 보장한다. 이는 성능적으로 오버헤드가 크다. 실사용 서버에선 좋은 선택이 아니다.
   * Stack 대신 무엇을 써야하는가?
     * Java API 문서에서는 더 완벽한 LIFO 자료구조로 Deque의 구현체인 ArrayDeque를 사용하라고 추천한다.
     * thread-safe해야한다면, ConcurrentLinkedDeque을 사용하면 된다. 이는 lock-free한 자료구조를 사용하여 thread-safe를 보장하여 성능상 더 유리하다고 한다.
+
+  ---
 </details>
 
 #### Q. Inner Class와 Nested Class
 <details>
   <summary>답변</summary>
-  
+
+  ---
+
   * 자바에선 class 안에 class를 선언할 수 있다.
     * 이를 통해 논리적으로 군집화를 할 수 있으며, 불필요한 외부 노출을 줄여 캡슐화를 할 수 있다. 또한, 가독성을 높이며 유지 보수하기 좋은 코드를 작성할 수 있다.
   * 종류
@@ -608,12 +750,16 @@
       * Inner Class는 Outer Class의 객체를 생성한 뒤 해당 객체를 이용해서 객체를 생성할 수 있다.
         * Inner Class의 경우 보통 Outer Class에 대한 참조를 갖고 있다. 이로인해 GC가 수거하지 못해, 메모리 누수 가능성이 있다.
   * Nested Class를 구현하는데 Outer Class에 대한 멤버를 참조하지 않는다면, 무조건 Static Nested Class로 선언해주는 것이 좋다.
+
+  ---
 </details>
 
 #### Q. 접근 제어자
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 접근 제어자란?
     * 클래스나 멤버 선언 시 **부가적인 의미를 부여하는 키워드**.
     * **객체지향의 정보 은닉**(캡슐화)을 위해 사용된다.
@@ -622,12 +768,16 @@
     * protected: 같은 패키지 혹은 다른 패키지에서 해당 클래스를 상속한 클래스에서 접근 가능하다.
     * default: 클래스 멤버는 같은 클래스의 멤버와 같은 패키지에 속하는 멤버에서만 접근 가능하다.
     * private: 같은 클래스 내에서만 접근 가능하며, 외부에서 접근이 불가능하다.
+
+  ---
 </details>
 
 #### Q. System.out.println()대신 로깅을 사용하는이유
 <details>
   <summary>답변</summary>
-  
+
+  ---
+
   * System.out.println의 단점
     * 로그가 시스템 콘솔에만 출력된다.
     * 로그 레벨을 설정할 수 없다.
@@ -637,26 +787,30 @@
     * 로그 레벨을 설정할 수 있다.
     * 로그를 시스템 콘솔 외에도 파일이나 특정 서버로 보낼 수 있다. (저장 가능)
     * 비동기적으로 동작하도록 만들 수 있다. (성능상 좋음)
+
+  ---
 </details>
 
 #### Q. 직렬화 / 역직렬화의 차이
 <details>
   <summary>답변</summary>
-  
-  * 직렬화
-    * **객체 -> 스트림** (전송혹은 저장하기 위함)
-    * 데이터 구조나 객체 상태를 동일하거나 다른 컴퓨터 환경(파일이나 메모리 버퍼, 혹은 네트워크 전송)에 저장또는 전송할 수 있도록 변환하는 과정.
-    * **객체들의 데이터를 전송하거나 저장하기 위해 연속적인 데이터(바이트)로 변환시키는 과정.**
-  * 역직렬화
-    * **스트림 -> 객체** (전송 혹은 저장된 것을 다시 객체로 사용하기 위함)
-    * 직렬화된 데이터를 다시 객체의 형태로 변환시키는 과정.
-    * **데이터 전송 혹은 저장하기 위해 연속적인 데이터로 변환된 데이터를 다시 객체의 형태로 복원하는 과정.**
+
+  ---
+
+  * 직렬화 : 데이터를 연속적인 데이터로 변형하는 것
+    * 객체 -> 스트림 (전송 혹은 저장하기 위함)
+  * 역직렬화 : 직렬화된 데이터를 변환하여 객체의 형태로 표현하는 것
+    * 스트림 -> 객체 (전송 혹은 저장된 것을 다시 객체로 사용하기 위함)
+
+  ---
 </details>
 
 #### Q. 깊은 복사와 얕은 복사
 <details>
   <summary>답변</summary>
-  
+
+   ---
+
   * 얕은 복사 : 객체의 저장된 멤버들을 그대로 복사한다.
     * 객체안에 저장된 멤버중 참조하고 있는 객체는 복제되지 않는다.
     * 참조변수만 복제되고, 힙에 저장되어 있는 객체는 그대로 남아 있는다.
@@ -665,6 +819,8 @@
     * 객차안에 저장된 멤버중 참조하고 있는 객체까지 복제한다.
     * 참조변수도 복제하고, 힙에 저장되어 있는 객체까지 복제한다. ( new를 통해 인스턴스화 )
     * 원본의 변경이 복사본의 영향을 끼치지 못한다. ( 힙에 저장된 객체가 서로 다르기 때문 )
+
+  ---
 </details>
 
 <br>
@@ -674,7 +830,9 @@
 #### Q. JVM이란?
 <details>
   <summary>답변</summary>
-  
+
+  ---
+
   * JVM이란
     * 자바 가상 머신.
     * 자바 바이트코드를 실행할 수 있게 해주는 주체다.
@@ -685,24 +843,32 @@
       * 윈도우, 맥, 리눅스.. 등등 운영체제에 종속적이지 않다.
     * GC
       * 클래스 인스턴스는 사용자 코드에 의해 명시적으로 생성되고 GC에 의해 자동적으로 소멸된다.
+
+  ---
 </details>
 
 #### Q. 자바 프로그램의 동작 과정
 <details>
   <summary>답변</summary>
-  
+
+  ---
+
   1. JAVA 소스 코드 파일 (.java)를 JAVA 컴파일러 (javac)로 바이트 코드(.class)로 **변환한다**.
   2. JVM 내에 있는 Class Loader가 runtime data area로 바이트 코드 파일을 **적재한다**.
      * Loading -> Linking -> Initializing
   3. JVM 내에 있는 execution engine(Interpreter, JIT Compiler, GC)이 runtime data area에 적재된 바이트 코드를 기계어로 변경해 명령어 단위로 **실행한다**.
   
   > 더 자세한 내용은 [여기](https://github.com/binghe819/TIL/blob/master/JAVA/JVM/jvm_structure.md)
+
+  ---
 </details>
 
 #### Q. JVM 메모리 구조
 <details>
   <summary>답변</summary>
-  
+
+  ---
+
   * 자바의 실행 과정
     * JVM 내에 있는 Class Loader가 runtime data area로 바이트 코드 파일을 적재한다.
   * Runtime Data Area 구조
@@ -719,26 +885,38 @@
       * 스택 프레임 내의 지역변수, 파라미터, 리턴 값, 참조 변수등을 저장한다.
       * 스레드마다 독립적으로 존재하는 영역이며, 스레드 간 공유가 불가능하다.
   * 더 자세한 내용은 [여기](https://github.com/binghe819/TIL/blob/master/JAVA/JVM/jvm_structure.md)
+
+  ---
 </details>
 
 #### Q. GC란? - 예정
 <details>
-  <summary>답변</summary>
+  <summary>토글</summary>
   
+  --- 
   
+  * 
+  
+  --- 
 </details>
 
 #### Q. GC 동작 방식 - 예정
 <details>
   <summary>토글</summary>
   
+  --- 
   
+  * 
+  
+  --- 
 </details>
 
 #### Q. call by value와 call by reference
 <details>
   <summary>답변</summary>
-  
+
+  ---
+
   * call by value
     * 함수 호출시 전달되는 변수의 값을 복사하여 함수의 인자로 전달하는 방식.
     * 복사된 인자는 함수 안에서 지역적으로 사용된다.
@@ -753,12 +931,16 @@
     * 객체의 주소 값을 직접 넘기지 않고, 객체 주소를 바라보는 또 다른 변수를 복사해 만들어서 넘긴다.
       * 인스턴스에 접근하는 참조 값을 저장하는 변수를 넘기는 것.
     * Java uses only call by value while passing reference variables as well. It creates a copy of references and passes them as valuable to the methods.
+
+  ---
 </details>
 
 #### Q. 리플렉션이란?
 <details>
   <summary>답변</summary>
-  
+
+  ---
+
   * 리플렉션이란?
     * 컴파일되고 실행되면서 Class Loader에 의해 Method 영역에 로딩되있는 클래스의 **메타데이터**를 이용해 런타임 시점에 해당 클래스의 인스턴스를 생성하거나 멤버에 **접근할 수 있도록 해주는 자바 API**이다.
     * 이 모든 것을 런타임에 할 수 있다.
@@ -766,22 +948,30 @@
   * 대표적 사용 예시
     * **Component Scan** (클래스의 애노테이션을 스캔하기 위해 클래스 메타 데이터를 이용하기 위함)
     * 다이나믹 프록시 (Method 이름)
+
+  ---
 </details>
 
 #### Q. 리플렉션 사용시 주의할 점
 <details>
   <summary>답변</summary>
-  
+
+  ---
+
   1. 지나친 사용은 성능 이슈를 야기할 수 있다. 반드시 필요한 경우에만 사용할 것을 추천한다.
      * Component Scan처럼 프로그램 실행시 한 번만 하면 되는 경우에만 사용하는 것이 좋다.
   2. 컴파일 타임에 확인되지 않고 런타임 시에만 발생하는 문제를 만들 가능성이 있다.
   3. 접근 지시자를 의도적으로 무시할 수 있기 때문에 자칫하면 보안적 이유가 발생할 수 있다.
+
+  ---
 </details>
 
 #### Q. 동기화(synchronized) vs 비동기화(asynchronized)
 <details>
   <summary>답변</summary>
-  
+
+  ---
+
   * 동기화
     * 어느 메서드가 실행하는 동안 다른 메서드를 실행이 불가능하게 블록하는 것.
       * 작업을 요청한 후 해당 작업의 결과가 나올 때까지 기다린 후 처리하는 것.
@@ -791,6 +981,8 @@
       * 작업을 요청한 후 해당 작업의 결과가 나올 때까지 기다리지 않고 다음 작업을 처리하는 것.
     * 메서드를 실행시키면 바로 blocking되지 않고 이벤트 큐 혹은 백그라운드 스레드에 해당 task를 위임하고, 바로 다음 코드를 실행하는 것.
     * ex. ajax, 스레드, 로깅 비동기 처리
+
+  ---
 </details>
 
 <br>
@@ -805,6 +997,8 @@
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 객체지향이란
     * 실세계에 존재하는 사물을 추상화시켜 상태와 행위를 가진 객체로 만들고, 그 객체들이 서로 상호작용하며 동작하도록 프로그래밍하는 프로그래밍 기법.
     * 프로그래밍 세계에서 "객체"들이 주가 되어, 각각의 "객체"가 메시지를 주고 받으며, 비즈니스 처리를 하는 것.
@@ -814,11 +1008,15 @@
       * 상태와 행위를 함께 지니며 스스로 자기 자신을 책임지는 객체.
     * 세 가지만 기억하자
       * **클래스는 도구일 뿐이다. 중요한 것은 객체의 역할, 책임, 협력이다.**
+
+  ---
 </details>
 
 #### Q. SOLID 원칙이란?
 <details>
   <summary>답변</summary>
+
+  ---
 
   * 객체 지향 프로그래밍 및 설계의 다섯 가지 기본 원칙.
   > 보통 저수준의 SOLID를 많이 고민하지만, 고수준에도 동일하게 적용 가능하다. 이를 답변에서 얘기하자.
@@ -863,12 +1061,16 @@
     * 예시
       * **카드 결제라는 고차원 모듈이 있다면, 카드 결제 컨트롤러에선 신한 카드 결제에 의존하지 말고, 카드 결제라는 추상적인 것에 의존해야 한다.**
       * 그리고 신한 카드 결제 혹은 다른 카드 결제들은 모두 카드 결제라는 모듈을 구현하는 저차원 모듈이다. (세부사항이다.)
+
+  ---
 </details>
 
 #### Q. 응집도와 결합도
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 응집도
     * **모듈에 포함된 내부 요소들이 연관돼 있는 정도를 나타냄.**
     * **응집도 높음** (좋음): 모듈 내의 요소들이 하나의 목적을 위해 긴밀하게 혀볅한다면 해당 모듈은 높은 응집도를 가진다고 할 수 있다.
@@ -881,12 +1083,16 @@
   * 이 둘은 캡슐화와도 관계가 있다.
     * 캡슐화의 정도가 객체의 응집도와 결합도를 결정하기 때문.
     * 캡술화를 잘 지키면 응집도는 높이고, 모듈 사이의 결합도는 낮출 수 있다.
+
+  ---
 </details>
 
 #### Q. OOP의 4가지 특징
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 캡상추다.
     * 캡슐화
       * 객체의 속성과 행위를 하나로 묶고, 실제 구현 내용 일부를 외부에 감추어 은닉하는 것.
@@ -901,12 +1107,16 @@
     * 다형성
       * 동일한 메시지를 수신 했을 때, 객체의 타입에 따라 다르게 응답할 수 있는 것. (컴파일 타임이 아닌 런타임에 형태가 결정된다.)
       * 인터페이스, 추상 클래스를 이용해 구현
+
+  ---
 </details>
 
 #### Q. 추상클래스와 인터페이스의 차이
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 목적이 다르다.
     * 추상 클래스: **상태와 행위들을 모아 놓은 템플릿**
       * 추상 클래스는 공통된 기능은 그대로 물려받거나 혹은 별도로 구현하고, 새로운 속성과 행위를 **확장하는 것이 목적**.
@@ -925,12 +1135,16 @@
     * **상위 하위 클래스 간의 결합도가 너무 높다.** (종속적이다)
       * 추상 클래스는 하위 클래스가 상위 클래스의 상태와 행위를 공유하기 때문에 하위 클래스가 상위 클래스에 의존하는 관계가 된다.
     * 정말 필요한 IS-A 관게를 제외하곤 인터페이스를 사용하는 것이 좋은 설계.
+
+  ---
 </details>
 
 #### Q. 상속보다 합성이 좋은 이유는?
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 상속
     * 두 관점에서 좋지 않다.
       1. 캡슐화를 위반
@@ -950,25 +1164,39 @@
   * 쉽게 생각하면
     * **상속은 구체적인 것에 의존한다 (컴파일 타임) -> 코드의 수정이 발생한다.**
     * **합성은 추상적인 것에 의존한다 (런타임) -> 의존성만 바꿔주면 되므로, 코드의 수정이 필요없다.**
+
+  ---
 </details>
 
 #### Q. 원시값 포장 vs VO
 <details>
   <summary>답변</summary>
   
+  ---
+
   * [여기](https://github.com/binghe819/TIL/blob/master/OOP&%EC%84%A4%EA%B3%84/%EA%B8%B0%ED%83%80/%EC%9B%90%EC%8B%9C%EA%B0%92%20%ED%8F%AC%EC%9E%A5%EA%B3%BC%20VO.md#3-%EC%9B%90%EC%8B%9C%EA%B0%92-%ED%8F%AC%EC%9E%A5%EA%B3%BC-vo%EC%9D%98-%EC%B0%A8%EC%9D%B4)를 참고
+
+  ---
 </details>
 
 #### Q. 전략 패턴 vs 프록시 패턴 - 예정
 <details>
-  <summary>답변</summary>
+  <summary>토글</summary>
+  
+  --- 
   
   * 
+  
+  --- 
 </details>
 
 <br>
 
 ### 디자인 패턴
+
+<br>
+
+## 테스트
 
 <br>
 
@@ -978,16 +1206,22 @@
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 스프링은 **자바 엔터프라이즈 개발을 위한 오픈소스 애플리케이션 프레임워크**입니다.
   * 스프링은 **자바를 이용한 동적인 웹 사이트를 개발하기 위해 여러가지 추상화 서비스를 제공하는 애플리케이션 프레임워크.**
   * 스프링의 핵심 요소
     * 애플리케이션 개발시 오직 애플리케이션 레벨의 **비즈니스 로직에만 집중할 수 있도록 다양한 서비스 인프라**를 지원한다. (**애플리케이션 레벨에서의 인프라를 지원**)
+
+  ---
 </details>
 
 #### Q. 프레임워크가 무엇인가요? 라이브러리와의 차이점은?
 <details>
   <summary>답변</summary>
   
+  ---
+
   * **제어**
     * 라이브러리 (능동)
       * 라이브러리를 사용하는 코드는 애플리케이션 흐름을 직접 제어한다.
@@ -998,12 +1232,16 @@
   * 목적
     * 둘 다 목적은 코드의 재사용성과 편의성.
     * 라이브러리는 재사용성에 더 집중하고, 프레임워크는 기본적인 틀을 제공해주는 것에 집중한다.
+
+  ---
 </details>
 
 #### Q. 스프링을 왜 사용하나요?
 <details>
   <summary>답변</summary>
   
+  ---  
+
   * **문서화**
     * 자바진영에서 가장 보편화된 프레임워크. **문서화**가 잘 되어 있다.
   * **개발 편의성, 생산성**
@@ -1012,12 +1250,16 @@
   * **비침투성 - POJO** (관심사 분리)
     * 비침투성을 지향하기 때문에, **기존의 도메인 부분에 대한 자바 코드를 최대한 건드리지 않고 웹 서비스를 할 수 있다**.
     * ex. 우아한 테크코스 체스 미션 -> 처음엔 콘솔에서만 동작하도록 했음. -> 웹 서비스를 위해 스프링을 적용시키면서 기존의 도메인 코드는 변경이 별로 발생하지 않음.
+
+  ---
 </details>
 
 #### Q. 스프링 핵심 원칙
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 스프링의 핵심 원칙은 세 가지다. IoC/DI, AOP, PSA
   * IoC
     * **Inversion Of Control** (제어의 역전)을 의미하며, **객체의 생성과 생명주기 관리까지 모든 객체에 대한 제어권을 개발자가 아닌 프레임워크에게 위임**한 것을 의미한다.
@@ -1040,12 +1282,39 @@
     * 예시
       * `@Cacheable`: 캐시대상으로 redis를 사용하던 ehcache를 사용하던 @Cacheable을 처리하는 내부 코드는 변하지 않는다.
       * `@Transactional`: JPA의 구현체로 hibernate를 이용하던 다른 구현체를 이용하던 @Transactional을 처리하는 내부 코드를 변경할 필요가 없다.
+
+  ---
+</details>
+
+#### Q. Spring vs Spring Boot - 예정
+<details>
+  <summary>답변</summary>
+  
+  ---
+
+  * 
+
+  ---
+</details>
+
+#### Q. POJO의 장점은
+<details>
+  <summary>답변</summary>
+  
+  ---
+
+  * 어떠한 프레임워크에도 의존하지 않는다.
+    * 자바를 이용한 테스트에 용이하다.
+
+  ---
 </details>
 
 #### Q. 생성자 주입을 추천하는 이유는?
 <details>
   <summary>답변</summary>
   
+  ---
+
   * **불변**
     * 대부분의 의존관계 주입은 한번 일어나면 애플리케이션 종료시점까지 의존관계를 변경하지 않는 것이 좋다.
     * 그 이유는 불변을 보장함으로써, 추후에 **발생할 수 있을 버그를 사전에 차단해 주는 효과**를 얻기 때문이다.
@@ -1054,23 +1323,31 @@
     * Setter 주입의 경우 상태가 **불변하지 않기 때문에 실수할 확률이 높다.** 
   * **스프링에 의존적이지 않다.**
     * 스프링 application context가 없어도 단독으로 테스트 혹은 도메인으로써의 역할을 수행할 수 있다.
+
+  ---
 </details>
 
 #### Q. 필드 주입을 추천하지 않는 이유
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 우선 스프링 공식문서에서도 추천하지 않는다.
   * 스프링에 의존적인 코드가 된다. - 스프링은 기본적으로 비침투성(POJO)를 지향한다.
     * 우선 필드 주입은 수정자(Setter)주입과 유사한 방식으로 동작한다.
     * 또한, **필드 주입은 IoC 컨테이너에서 제공해주는 것이므로 컨테이너에 너무 의존적인 코드**가 된다.
     * 만약 **테스트시 application context가 없다면 해당 객체는 테스트가 불가능하다.** (순수 자바 코드 단위 테스트 불가)
+
+  ---
 </details>
 
 #### Q. servlet과 serlvet container
 <details>
   <summary>답변</summary>
   
+  ---
+
   * servlet
     * **Java로 HTTP 요청 및 응답을 처리하기 위한 표준**
     * 서블릿은 클라이언트의 http 요청을 받아 **비즈니스 로직을 수행하고, 적절한 http 응답을 생성하는 자바 객체**이다.
@@ -1086,12 +1363,16 @@
       * 멀티스레딩 지원 (요청당 스레드로 처리)
       * 선언적인 보안 관리
     * 대표적인 servlet container: tomcat, netty
+
+  ---
 </details>
 
 #### Q. servlet container의 동작 흐름
 <details>
   <summary>답변</summary>
   
+  ---
+
   1. 사용자 **요청 파싱**
   2. 새로운 **스레드를 생성**하고, **HttpServletRequest, HttpServletResponse 생성.**
   3. 사용자 요청을 분석하여 **대응되는 서블릿 검색**. (DD.xml을 통해 서블릿을 미리 정의해둔다.)
@@ -1099,12 +1380,16 @@
   5. **서블릿은 클라이언트에게 넘길 응답을 작성**. 이때 Response 객체를 사용한다.
   6. servlet container가 서블릿으로부터 받은 **Response를 적절한 http response로 만들어 클라이언트에 반환**.
   7. 요청을 처리한 **스레드는 소멸하거나 스레드 풀로 반환**.
+
+  ---
 </details>
 
 #### Q. Bean이란
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 스프링 **IoC Container에 의해 생성 및 관리되는 자바 객체**를 의미한다.
     * 스프링 IoC Container에 의해 생명주기가 관리되는 자바 객체.
     * 스프링의 핵심 원칙은 IoC/DI의 근간이 되는 개념.
@@ -1118,12 +1403,16 @@
     * constructor-arg: 생성 시 생성자에 전달할 인수
     * property: 생성 시 bean setter에 전달할 인수
     * init method와 destory method
+
+  ---
 </details>
 
 #### Q. Java Bean vs Spring Bean
 <details>
   <summary>답변</summary>
   
+  ---
+
   * Java Bean
     * 데이터 표현하는 것을 목적으로 하는 자바 클래스.
     * 특별한 것 없고, 그저 아래 규약에 맞춰서 만든 클래스를 의미한다.
@@ -1134,68 +1423,97 @@
       5. 직렬화가 가능해야한다.
   * Spring Bean
     * Spring Framework의 IoC Container에 의해 등록, 생성, 조회, 관계설정이 되는 객체를 의미한다.
+
+  ---
 </details>
 
 #### Q. Bean Scope
 <details>
   <summary>답변</summary>
-  
+
+  ---
+
+  * 빈의 생명주기와 관련이 있다.
   * singleton: 하나의 Bean 정의에 대해서 **스프링 IoC 컨테이너마다 단 하나의 객체만 존재**
   * prototype: 하나의 Bean 정의에 대해서 **매 Bean을 찾는 요청마다 새로운 Bean을 생성.** (Ioc 컨테이너가 생명주기 관리를 아예 하지 않는다. 그저 팩토리 메서드)
   * request: 하나의 Bean 정의에 대해서 하나의 HTTP Request의 생명주기 안에 단 하나의 객체만 존재. (각각의 요청마다 자신만의 객체를 가진다.)
   * session: 하나의 Bean 정의에 대해서 하나의 HTTP Session의 생명주기 안에 단 하나의 객체만 존재.
   * global session: 하나의 Bean 정의에 대해서 하나의 global HTTP Session의 생명주기 안에 단 하나의 객체만 존재.
+
+  ---
 </details>
 
 #### Q. @Bean vs @Component
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 공통점
     * 둘 다 IoC 컨테이너에 빈으로 등록하기 위한 방법.
   * 차이점
-    * **@Bean은 개발자가 컨트롤 불가능한 외부 라이브러리**를 등록할 경우 사용한다. (그저 생성만 지원한다.)
-    * **@Component를 개발자가 직접 컨트롤 가능한 클래스**를 등록할 경우 사용한다.
+    * **@Bean은 개발자가 컨트롤 불가능한 외부 라이브러리**를 등록할 경우 사용한다. (그저 생성만 지원한다.) - Method Level
+    * **@Component를 개발자가 직접 컨트롤 가능한 클래스**를 등록할 경우 사용한다. - Class Level
+
+  ---
 </details>
 
 #### Q. Bean 등록 방법
 <details>
   <summary>답변</summary>
   
+  ---
+
   * XML을 이용한 빈 설정
   * Component Scan을 이용한 빈 설정
   * 자바 설정파일(`@Configuration`)을 이용한 빈 설정
+
+  ---
 </details>
 
 #### Q. Bean 생명주기 - 예정
 <details>
-  <summary>답변</summary>
+  <summary>토글</summary>
+  
+  --- 
   
   * 
+  
+  --- 
 </details>
 
 #### Q. @ComponentScan
 <details>
   <summary>답변</summary>
   
+  ---
+
   * **리플렉션 기술**을 활용하여 @Component 혹은 streotype 애노테이션이 붙은 **Class들을 자동으로 scan하여 Bean으로 등록해주는 역할**을 해주는 애노테이션.
   * 스프링부트는 `@ComponentScan`이 붙은 패키지부터 Scan을 한다.
+
+  ---
 </details>
 
 #### Q. ComponentScan 과정
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 스프링 애플리케이션을 동작시키면, 스프링 IoC 컨테이너가 생성된다.
   * 만약 `@ComponentScan`이 붙은 클래스가 있다면, 해당 클래스를 기준으로 하위 패키지에 등록된 모든 `@Component`가 붙은 클래스를 스캔한다.
   * 이때, reflection api를 사용한다. (필자는 reflections 라이브러리를 이용하여 Class 파일을 스캔했다.)
   * 스캔된 클래스를 IoC 컨테이너에 빈으로 등록한다.
+
+  ---
 </details>
 
 #### Q. Spring 서버 부팅시 동작 과정 - 예정
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 스프링의 경우
     1. 톰캣이 실행된다. (톰캣을 통해 실행해야 함)
     2. `ServletContextListener`의 스프링에서 제공하는 구현체인`ContextLoaderListener`에 의해 `Application Context`이 생성된다.
@@ -1204,12 +1522,16 @@
     5. 빈들의 생명주기에 맞는 메서드가 실행된다. (빈의 초기화 메서드, 소멸 메서드 등등)
   * 스프링 부트의 경우
     1. 
+
+  ---
 </details>
 
 #### Q. Thread Local
 <details>
   <summary>답변</summary>
   
+  ---
+
   * Thread Local이란
     * 각 Thread마다 갖는 독립적인 지역 변수를 의미한다.
     * Java.lang 패키지에서 제공하는 쓰레드 범위 변수. 한 스레드에서 공유할 변수.
@@ -1219,26 +1541,38 @@
   * 스프링에서의 사용처
     * 트랜잭션 매니저에서 transaction Context를 전파하는데 사용된다.
     * SpringSecurity에서는 ThreadLocal을 기본 전략으로 SecurityContextHolder를 사용한다.
+
+  ---
 </details>
 
-#### Q. Spring MVC 동작 과정
+#### Q. Spring MVC 동작 과정 - 예정
 <details>
-  <summary>답변</summary>
+  <summary>토글</summary>
   
-  
-</details>
-
-#### Q. DispatcherServlet이란?
-<details>
-  <summary>답변</summary>
+  --- 
   
   * 
+  
+  --- 
+</details>
+
+#### Q. DispatcherServlet이란? - 예정
+<details>
+  <summary>답변</summary>
+  
+  ---
+  
+  * 
+
+  ---
 </details>
 
 #### Q. Filter vs Interceptor
 <details>
   <summary>답변</summary>
   
+  ---
+
   * 공통점
     * 둘 다 웹과 관련된 공통 관심 사항을 처리한다.
   * 차이점
@@ -1255,6 +1589,8 @@
       * 시점: 핸들러 호출 전(`preHandle`), 호출 후 (`postHandle`), 요청 완료 이후(`afterCompletion`)을 제공.
   * 실행 과정
     * HTTP 요청 -> Servler Container -> Filter -> Servlet (Dispatcher Servlet) -> Interceptor -> Controller
+
+  ---
 </details>
 
 <br>
