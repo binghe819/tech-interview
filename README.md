@@ -1306,7 +1306,22 @@
   <p align="center"><img src="./image/jdk_proxy_vs_cglib.png" > </p>
   
   * 공통점
-    * 
+    * 다이내믹 프록시를 만들 수 있다.
+  * JDK Dynamic Proxy
+    * Proxy Factory를 이용하여 런타임시 다이내믹 프록시 객체를 만든다.
+    * **반드시 인터페이스를 정의해야 하며, 인터페이스에 대한 명세를 기준으로 프록시를 만든다.**
+      * 인터페이스 선언에 대한 강제성이 있는 단점이 있다.
+    * 내부적으로 JDK Dynamic Proxy에서는 `InvationHandler`라는 인터페이스를 구현해 만들어지는데, invoke 함수를 오버라이딩하여 Proxy의 위임 기능을 수행한다.
+    * **리플렉션을 이용하므로 성능상 저하가 발생할 수 있다.**
+  * CGLib
+    * CGLib은 순수 Java JDK 라이브러리가 아닌 CGLIB라는 외부 라이브러리를 사용하는 방식이다.
+    * **CGLIB의 Enhancer 클래스를 바탕으로 Proxy를 생성하며, 인터페이스가 없어도 Proxy를 생성할 수 있다.**
+      * CGBLIB Proxy는 **타겟 클래스를 상속받아 생성하기 때문에 Proxy를 생성하기 위해 인터페이스를 만들어야하는 수고를 덜 수 있다.**
+    * 하지만 상속을 이용하기 때문에, `final`이나 `private`와 같이 상속을 막는 방식은 사용하면 안된다는 단점이 있다.
+    * **바이트 코드 조작을 이용하므로 성능상 JDK Dynamic Proxy보다 빠르다.**
+  * 결론 - 다른점
+    * 인터페이스의 유무
+    * 다이내믹 프록시 객체 생성 방식
   
   --- 
 </details>
