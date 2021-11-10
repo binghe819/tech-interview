@@ -688,6 +688,7 @@
     * HashMap은 주요 메서드에 synchronized 키워드가 없어 thread-safe하지 않다.
     * HashTable은 주요 메서드에 synchronized 키워드가 있어 thread-safe하다. 당연히 HashMap보다 느리다.
     * ConcurrentHashMap은 주요 메서드에 synchronized 키워드가 없지만, thread-safe하다. 서로 다른 스레드가 같은 해시 버킷에 접근할 때만 해당 블록이 잠기게 되므로, HashTable보다 효율적이다.
+      * HashTable은 하나의 버킷을 접근해도 모든 버킷을 잠금 상태로 만들지만, ConcurrentHashMap은 해당 해시 버킷만을 잠금한다.
   * null 허용
     * HashMap은 key, value에 null을 허용한다.
     * HashTable과 ConcurrentHashMap은 key, value에 null을 허용하지 않는다.
@@ -1360,7 +1361,7 @@
   --- 
 </details>
 
-#### Q. 각 테스트별로 작성하는 이유는?
+#### Q. 테스트 작성 이유 (인수, 통합, 목, 단위)
 <details>
   <summary>답변</summary>
   
