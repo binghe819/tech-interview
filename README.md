@@ -112,7 +112,7 @@
   ---
 </details>
 
-#### Q. Generic은 왜 Wrapper Class만 사용한가?
+#### Q. Generic은 왜 Wrapper Class만 사용하는가?
 <details>
   <summary>답변</summary>
 
@@ -313,7 +313,7 @@
   ---
 </details>
 
-#### Q. Enum을 사용하는 이유는?
+#### Q. Enum을 사용하는 이유는? - 수정 예정
 <details>
   <summary>답변</summary>
 
@@ -1990,9 +1990,259 @@
   --- 
 </details>
 
+#### Q. 쿠키와 세션이란? 동작과정은?
+<details>
+  <summary>토글</summary>
+  
+  --- 
+  
+  * 
+  
+  --- 
+</details>
+
+#### Q. 세션 방식과 토큰 방식의 차이점과 장단점은?
+<details>
+  <summary>토글</summary>
+  
+  --- 
+  
+  * 
+  
+  --- 
+</details>
+
+#### Q. Restful 이란?
+<details>
+  <summary>토글</summary>
+  
+  --- 
+  
+  * 
+  
+  --- 
+</details>
+
+#### Q. HTTP 상태 코드
+<details>
+  <summary>토글</summary>
+  
+  --- 
+  
+  * 
+  
+  --- 
+</details>
+
+#### Q. HTTP 메시지 구성
+<details>
+  <summary>토글</summary>
+  
+  --- 
+  
+  * 
+  
+  --- 
+</details>
+
 <br>
 
 ## 운영체제
+
+#### Q. 프로그램 vs 프로세스 vs 스레드
+<details>
+  <summary>답변</summary>
+  
+  --- 
+  
+  * 프로그램: 소스 코드가 파일 단위로 저장 장치에 저장되어 있으며, 아직 실행되지 않은 상태를 의미한다.
+    * 디스크에 저장되어 있는 실행 가능한 파일
+  * 프로세스: 실행 중인 프로그램. 프로그램을 실행하기 위해서 주소 공간, 메모리 등을 운영체제로부터 할당받은 상태.
+    * 프로그램이 실행되어 RAM에 적재되어 실행 중인 상태
+    * 여러 개의 스레드를 포함할 수 있다.
+  * 스레드: 프로세스의 실행 단위. 같은 프로세스 내에 있는 스레드끼리는 프로세스의 자원을 공유할 수 있다.
+  
+  --- 
+</details>
+
+#### Q. 프로세스 메모리 구조
+<details>
+  <summary>답변</summary>
+  
+  --- 
+
+  * 프로세스 메모리와 PCB의 차이
+    * PCB는 프로세스를 제어하기 위해 운영체제가 저장하는 자료구조이다. (프로세스의 위치 값, PC값 등등)
+    * 프로세스 메모리는 그저 프로그램을 실행하는데 필요한 메모리를 저장시켜놓는 공간이다.
+  * **프로세스 메모리 구조**
+    * 코드 영역: 프로세스가 실행할 코드가 기계어의 형태로 저장된 공간.
+      * 컴파일 타임에 결정되며 Read-Only이다.
+    * 데이터 영역: 전역 변수, static 변수등이 저장된 공간.
+      * 컴파일 타임에 결정되며 Read-Write(실행 도중 변경 가능)이다.
+    * 힙 영역: 개발자가 관리하는 메모리 영역으로, 동적 할당할 때 사용된다. (ex. malloc)
+      * 런타임에 결정되며 개발자에 의해 메모리 공간이 동적으로 할당되고 해제된다.
+    * 스택 영역: 호출된 함수의 수행을 마치고 복귀할 주소 및 데이터(지역변수, 매개변수, 리턴값 등)를 임시로 저장하는 공간
+      * 컴파일 타임에 결정되며, 정해진 크기가 있으므로 초과시 StackOverFlow가 발생한다.
+  
+  --- 
+</details>
+
+#### Q. 스레드를 사용하는 이유는?
+<details>
+  <summary>답변</summary>
+  
+  --- 
+  
+  * 스레드가 없을 때의 단점은 아래와 같다.
+    * **프로세스간의 컨텍스트 스위칭 오버헤드**
+      * 프로세스는 프로세스마다의 독립적인 메모리를 가지고 있다. 그러므로 멀티 프로세스로 동작한다면 빈번한 컨텍스트 스위칭으로 인한 성능 저하가 발생한다.
+    * **프로세스 사이 통신의 어려움**
+      * 프로세스들은 독립된 주소공간을 가지고 있기 때문에, 단순한 방법으로 서로의 메모리 공간을 접근 할 수 없다.
+      * 공유메모리, 소켓등을 이용해서 접근 해야 한다.
+  * **스레드를 사용한다면**
+    * **빠른 컨텍스트 스위치**
+      * 스케줄링 단위가 프로세스였던 시절, Context Switching가 일어날 때마다 캐시 flush, 캐시 복수 등을 해야했다.
+      * 하지만, **스케줄링 단위가 Thread로 되면서 같은 프로세스 내의 Thread들을 Context Switch를 할 때는 TCB만 바꾸면 된다.**
+      * **메모리 상에서의 주소 이동도 필요없다.** (프로세스는 주소 이동을 해야함)
+    * 스레드간 통신으로 멀티스레드 구현
+      * 스레드는 하나의 프로세스에 여러 개 존재하며, 프로세스의 Heap, Static, Code 영역을 공유한다. 즉, 같은 프로세스내에서 스레드끼리의 통신은 굉장히 빠르고 쉽게 가능하다.
+
+  --- 
+</details>
+
+#### Q. 스택을 스레드마다 독립적으로 할당하는 이유
+<details>
+  <summary>답변</summary>
+  
+  --- 
+  
+  * 결론부터 말하면 **독립적인 실행 흐름**을 추가하기 위해선 최소 조건으로 독립된 스택이 필요하기 때문이다.
+  * 스택은 함수 호출 시 전달되는 인자로 되돌아갈 주소값 및 함수 내에서 선언하는 변수 등을 저장하기 위해 사용되는 공간이다.
+  * 스택 메모리 공간이 독립적이라는 것은 독립적인 함수 호출이 가능하며, 이는 독립적인 실행 흐름을 의미한다.
+  
+  --- 
+</details>
+
+#### Q. PCB vs TCB
+<details>
+  <summary>답변</summary>
+  
+  --- 
+  
+  <p align="center"><img src="./image/pcb_vs_tcb.png" ><br>출처: http://www.kocw.net/home/search/kemView.do?kemId=1223639&ar=relateCourse </p>
+
+  <p align="center"><img src="./image/pcb_vs_tcb_2.png" ><br>출처: https://slideplayer.com/slide/12698810/<br>TCB는 PCB를 가리키는 포인터를 가진다 </p>
+
+  * PCB (Process Control Block)
+    * **운영체제가 프로세스를 제어하기 위한 정보를 저장하는 자료구조.**
+    * **OS의 스케줄러에 의해 Context Switching되는 프로세스의 정보 단위**
+  * TCB (Thread Control Block)
+    * **스레드의 정보를 저장하는 자료구조.**
+    * **프로세스에 존재하는 스레드 스케줄링 방식(라이브러리)에 의해 Context Switching되는 스레드의 정보 단위.**
+  * 당연히 공유하는 자원이 훨씬 많은 TCB의 컨텍스트 스위칭이 성능상 훨씬 좋다. 그러기에 멀티 스레드를 사용하는 것.
+  
+  --- 
+</details>
+
+#### Q. 병행 (Concurrency) vs 병렬 (Parallemlism)
+<details>
+  <summary>답변</summary>
+  
+  --- 
+  
+  > 자꾸 헷갈려서 그림을 많이 첨부한다..
+
+  <p align="center"><img src="./image/concurrency_vs_parallemlism.png" ><br>출처: https://medium.com/from-the-scratch/dont-be-confused-between-concurrency-and-parallelism-eac8e703943a </p>
+
+  <p align="center"><img src="./image/concurrency_vs_parallemlism_2.jpeg" ><br>출처: https://www.codeproject.com/Articles/1267757/Concurrency-vs-Parallelism</p>
+
+  * 공통점
+    * 동시에 여러 가지 일을 하는 것.
+  * 병행은 소프트웨어 성질이고, 병렬은 하드웨어의 성질이다.
+
+  <p align="center"><img src="./image/concurrency.jpeg" ><br>출처: https://luminousmen.com/post/concurrency-and-parallelism-are-different </p>
+  * 병행
+    * 싱글 코어
+      * **시분할로 컨텍스트 스위칭을 하며 여러 작업을 수행하는 방식. 동시에 하는  것 처럼 느껴진다.**
+      * 여러 가지의 일을 같은 시간에 번갈아가며 처리하는 방식.
+      * ex. 싱글 코어에 멀티 스레딩 방식
+    * 멀티 코어 => 병행 + 병렬
+    * 예시 - 싱글 코어 CPU
+    * Mutex, Deadlock이 발생할 수 있다.
+
+  <p align="center"><img src="./image/parallemlism.jpeg" ><br>출처: https://luminousmen.com/post/concurrency-and-parallelism-are-different </p>
+  * 병렬
+    * 멀티 코어 (싱글 코어에선 불가능하다.)
+      * **여러 가지의 일을 동시에 처리하는 방식.** (번갈아가면서 하는 것이 아닌 동시 처리)
+      * 멀티 코어를 잘 활용할 수 있다.
+    * 예시 - GPU
+  
+  --- 
+</details>
+
+#### Q. 멀티 프로세스 vs 멀티 스레드 - 예정
+<details>
+  <summary>답변</summary>
+  
+  --- 
+  
+  * 멀티 프로세스
+    * 개념
+      * 같은 시간에 여러 개의 프로세스를 띄우고 실행하는 방식.
+    * 장점
+      * 하나의 프로세스가 문제 발생시 다른 프로세스에 영향을 끼치지 않는다.
+    * 단점
+      * 많은 메모리 공간 차지
+      * 많은 CPU 시간을 차지한다.
+  * 멀티 스레드
+    * 개념
+      * 같은 시간에 여러 개의 스레드를 띄우고 실행하는 방식
+    * 장점
+      * 적은 메모리 공간 차지
+      * TCB를 컨텍스트 스위칭하므로 속도가 빠름
+    * 단점
+      * 동기화의 문제 존재
+      * 하나의 스레드가 문제 발생시 전체 스레드에 영향을 끼칠 수 있음
+  * 예시
+    * 웹 서버가 매 요청마다 프로세스로 할당한다면 멀티 프로세스, 스레드로 할당한다면 멀티 스레드라고 볼 수 있다.
+  
+  --- 
+</details>
+
+#### Q. Light Weight Process vs Heavy Weight Process
+<details>
+  <summary>답변</summary>
+  
+  --- 
+  
+  * 
+  
+  --- 
+</details>
+
+#### Q. User Level Thread vs Kernel Level Thread
+<details>
+  <summary>답변</summary>
+  
+  --- 
+  
+  * 
+  
+  --- 
+</details>
+
+#### Q. Context Switching이란? 언제 발생하는지?
+<details>
+  <summary>답변</summary>
+  
+  --- 
+  
+  * 컨텍스트 스위칭 개념
+    * 하나의 사용자 프로세스로부터 다른 사용자 프로세스로 **CPU의 제어권이 이양되는 과정.**
+  * 
+  
+  --- 
+</details>
 
 <br>
 
