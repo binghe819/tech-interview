@@ -1994,57 +1994,141 @@
   --- 
 </details>
 
-#### Q. 쿠키와 세션이란? 동작과정은?
+#### Q. 쿠키와 세션이란?
 <details>
-  <summary>토글</summary>
+  <summary>답변</summary>
   
   --- 
   
-  * 
+  * HTTP 프로토콜의 특성이자 약점을 보완하기 위해 쿠키와 세션을 사용한다.
+    * 비연결성 (connectionless): 클라이언트가 요청을 한 후 응답을 받으면 그 연결을 끊어 버리는 특징
+    * 무상태성 (stateless): 통신이 끝나면 상태를 유지하지 않는 특징
+    * 대표적으로 쿠키와 세션등을 사용하지 않으면 지속적인 로그인 환경을 구축할 수 없다. (물론 토큰 기반으론 가능)
+  * 쿠키란?
+    * 쿠키는 클라이언트측 브라우저 로컬에 저장되는 키와 값이 들어있는 작은 데이터이다.
+    * 브라우저가 종료되어도 쿠키 만료 기간이 있다면 클라이언트 (브라우저) 에서 보관하고 있는다.
+    * Response Header에 `Set-Cookie` 속성을 사용하면 클라이언트에 쿠키를 만들 수 있다.
+    * 쿠키는 사용자가 따로 요청하지 않아도 브라우저가 요청시 Request Header에 넣어서 자동으로 서버에 전송한다.
+    * 예시: "아이디와 비밀번호 저장하시겠습니까?", 장바구니 기능, "오늘 더 이상 이 창 보지 않음"
+  * 세션이란?
+    * 세션은 쿠키를 기반으로 하며, 서버에서 관리하는 사용자 정보 파일 (데이터)이다.
+    * 서버에서는 클라이언트를 구분하기 위해 세션 ID를 부여하며, 웹 브라우저가 서버에 접속해서 브라우저를 종료할 때까지 인증 상태를 유지한다.
+      * 클라이언트가 Request를 보내면, 해당 서버의 엔진이 클라이언트에게 유일한 세션 ID를 부여한다.
+    * 예시: 로그인후 정보 저장.
+  * 쿠키와 세션 차이
+    * 사용자 정보 저장 위치: 쿠키는 클라이언트, 세션은 서버
+    * 보안성: 쿠키는 클라이언트측에 저장하므로 언제든 스니핑 당할 우려가 있으나, 세션은 쿠키를 이용해서 sessionid만 저장하고 그것으로 구분해서 서버를 처리하기 때문에 보안성이 비교적 우수하다.
+    * 모든 정보를 세션에 저장하면 좋지만, 서버 자원의 낭비와 속도때문에 중요하지 않은 정보는 쿠키에 저장하는 것이 좋다.
   
   --- 
 </details>
 
 #### Q. 세션 방식과 토큰 방식의 차이점과 장단점은?
 <details>
-  <summary>토글</summary>
+  <summary>답변</summary>
   
   --- 
   
-  * 
+  * 세션 방식의 장단점
+    * 장점
+      * 토큰(JWT)과 비교하면 sessionid는 굉장히 작다. (네트워크 비용이 훨씬 적게 든다.)
+      * 중요한 정보를 서버측에 저장/관리하기 때문에 상대적으로 온전한 상태를 유지하기 유리하다.
+    * 단점
+      * sessionid가 클라이언트로 전달되기에 여전히 공격의 위험이 존재한다. (유효기간, HttpOnly, Secure등을 통해 보안성을 높여야한다.)
+      * 서버 확장성면에서 좋지 않다. (로드밸런싱을 적용한다면 세션 서버를 따로 두거나 sticky session, session clustering등을 고려해야 한다)
+      * 멀티 디바이스 환경에서 로그인 시 신경써줘야할 부분이 존재한다.
+      * stateful (매 요청마다 세션에 요청을 날리는 비용가 발생한다.)
+  * 토큰 방식의 장단점
+    * 장점
+      * 서버 확장성면에서 좋다. (로드밸런싱해도 따로 해줄 작업이 없다.)
+      * 멀티 디바이스 환경에 대한 부담이 없다.
+      * stateless
+    * 단점
+      * 클라이언트측에 토큰이 저장되게 공격에 노출될 가능성이 크다. (실제로 body부분은 base64url을 통해 쉽게 디코딩할 수 있다.)
+        * 민감한 정보를 담으면 안되며, 유효기간을 짧게 설정해 공격에 노출될 수 있는 시간을 최소화해야한다.
   
   --- 
 </details>
 
-#### Q. Restful 이란?
+#### Q. REST API란?
 <details>
-  <summary>토글</summary>
+  <summary>답변</summary>
   
   --- 
+
+  > 진정한 REST API는 로이 필딩이 정의한 REST를 지켜서 만든 API를 의미한다.
+  > 
+  > 본 정리자료에선 간단히만 설명하므로, 더 자세한 내용은 여기[그런 REST API로 괜찮은가?](https://www.youtube.com/watch?v=RP_f5dMoHFc)
+
+  * REST란
+    * Representational State Transfer의 약자
+    * **자원을 이름(자원의 표현)으로 구분하여 해당 자원의 상태(정보)를 주고 받는 모든 것을 의미한다**
+      * 자원(Resource)의 표현(Representation)에 의한 상태 전달
+  * REST 구성
+    * 자원 (Resource) : URI
+      * 모든 자원은 URI라는 고유한 ID가 존재하며, 자원은 서버에 존재한다.
+    * 행위 (Verb) : HTTP Method
+      * GET, POST, PUT, DELETE
+    * 표현 (Representation)
+      * 클라이언트가 자원의 상태(정보)에 대한 조작을 요청하면 서버는 이에 적절한 응답을 보낸다.
+      * REST에서 하나의 자원은 JSON, XML등 여러 형태의 Representation (표현)으로 나타내어 질 수 있다.
+  * REST 제약 조건 (이 모든 것을 지켜야 진정한 REST라고 할 수 있다.)
+    1. client - server
+    2. stateless (무상태성)
+    3. cache (캐시)
+    4. uniform interface (self-descriptive message, HATEOAS등)
+    5. layered system (다중 계층 - 보안, 로드 밸런싱, 암호화 계층, 프록시 등등)
+    6. code-on-demand (optional)
+  * REST API란?
+    * REST 기반의 규칙을 지켜서 설계된 API
+  * **개인적으로 모든 것은 클라이언트가 서버의 자원을 더 쉽게 이용할 수 있도록 하기 위함인 듯 하다.**
   
-  * 
+  더 자세한 내용은 [여기](https://github.com/binghe819/TIL/blob/master/Network/REST%20API/REST%20API.md#2-rest-api)
   
   --- 
 </details>
 
-#### Q. HTTP 상태 코드
+#### Q. 주요 HTTP 상태 코드
 <details>
-  <summary>토글</summary>
+  <summary>답변</summary>
   
   --- 
   
-  * 
+  * 2xx
+    * 200 OK
+    * 201 Created (PUT 또는 POST의 결과)
+    * 202 Accepted
+    * 204 No Content (요청에 대해서 보내줄 수 있는 컨텐츠가 없지만, 헤더는 의미있을 수 있다.)
+  * 3xx
+    * 301 Moved Permanently (리다이렉션 - 요청한 리소스의 URI가 **영구적으로** 변경되었음을 의미한다.)
+    * 302 Found (리다이렉션 - 요청한 리소스의 URI가 **일시적으로** 변경되었음을 의미한다.)
+  * 4xx
+    * 400 Bad Request (잘못된 문법이나 요청으로 인하여 서버가 요청을 이해할 수 없음을 의미한다.)
+    * 401 Unauthorized (미인증)
+    * 403 Forbidden (클라이언트가 콘텐츠에 접근할 권리가 가지고 있지 않음을 의미한다. 401과 다른 점은 서버가 클라이언트가 누구인지 알고 있습니다.)
+    * 405 Method Not Allowed
+    * 406 Not Accepted
+  * 5xx
+    * 500 Internal Server Error (서버가 처리 방법을 모르는 상황에서 발생한다.)
+    * 502 Bad Gateway (서버가 요청을 처리하는 데 필요한 응답을 얻기 위해 게이트웨이로 작업하는 동안 잘못된 응답을 수신했음을 의미한다.)
   
   --- 
 </details>
 
 #### Q. HTTP 메시지 구성
 <details>
-  <summary>토글</summary>
+  <summary>답변</summary>
   
   --- 
   
-  * 
+  * HTTP Request
+    * 시작 줄
+    * 헤더
+    * 바디
+  * HTTP Response
+    * 상태 줄
+    * 헤더
+    * 바디
   
   --- 
 </details>
