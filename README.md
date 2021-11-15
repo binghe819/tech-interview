@@ -3144,4 +3144,41 @@
   --- 
 </details>
 
+#### Q. Layered Architecture로 구현한 이유는?
+<details>
+  <summary>답변</summary>
+  
+  --- 
+  
+  * 레이어를 나눈 이유
+    * 관심사의 분리. 각 계층간의 관심사를 분리하기 위함 (추상화)
+  * 어떤 식으로 레이어를 나누었는가?
+    * Presentation
+      * **Presentation Layer == UI Layer** (Web UI, 앱, Console등등)
+        * UI가 변경되면 같이 변경되는 계층. ([Martin Flower](https://martinfowler.com/eaaDev/SeparatedPresentation.html))
+        * the presentation layer doesn’t need to know or worry about how to get customer data; **it only needs to display that information on a screen in particular format** - [Software Architecture Patterns by Mark Richards](https://www.oreilly.com/library/view/software-architecture-patterns/9781491971437/ch01.html)
+      * **자원에 대한 표현**의 역할을 담당. (유일하게 사용자가 접근하는 계층)
+        * presents the application’s features and data to the user.
+      * 역할
+        * 요청 및 응답 변환
+        * 인증
+        * 예외처리 (ExceptionHandler)
+    * Application
+      * **Service계층에서 비즈니스 로직을 처리하는 것이 아니다!**
+      * **이 계층은 트랜잭션, 도메인 간 순서 보장의 역할만 한다.**
+        * 그럼 **비즈니스 로직은 누가 처리하느냐!**
+        * **바로 도메인(Domain) Layer다!** -> 도메인에 작업 위임
+      * 역할
+        * 트랜잭션 관리
+        * **도메인 간 순서 보장 역할**
+    * Domain
+      * **핵심 비즈니스 로직을 처리하는 역할**. (클라이언트 요구사항을 코드화시키는 계층)
+      * 이 계층에서는 비즈니스 로직 상황을 반영하는 상태를 제어하고 사용하며, 그와 같은 상태 저장과 관련된 기술적인 세부사항은 Infra에 위임한다.
+        * 즉, 다른 시스템과의 통신, 지속성 세부 정보는 Infra 계층에게 위임한다.
+    * Infrastructure
+      * 상위 계층을 지원하는 일반화된 기술적 기능을 제공한다. (구현체)
+  
+  --- 
+</details>
+
 <br>
