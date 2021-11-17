@@ -1763,13 +1763,18 @@
   ---
 </details>
 
-#### Q. Bean 생명주기 - 예정
+#### Q. Bean 생명주기
 <details>
   <summary>토글</summary>
   
   --- 
   
-  * 
+  1. 빈 인스턴스화 및 의존성 주입
+  2. 스프링 *Aware 동작에 대한 검사 및 호출 (특정 빈이 자신을 생성하고 관리하는 ApplicationContext에 접근할 때 사용)
+  3. 빈 생성 콜백 메서드 호출 - `@PostConstruct`, `@InitializingBean`, `@Bean(initMethod)`
+  4. 빈 소멸 콜백 메서드 호출 - `@PreDestory`, `DisposableBean`, `@Bean(destoryMethod)`
+  
+  > 더 자세한 내용은 [여기](https://github.com/binghe819/TIL/blob/master/Spring/Core/bean%20lifecycle/bean%20lifecycle.md#%EB%B9%88-%EC%83%9D%EB%AA%85%EC%A3%BC%EA%B8%B0)참고.
   
   --- 
 </details>
@@ -1780,22 +1785,14 @@
   
   ---
 
-  * **리플렉션 기술**을 활용하여 @Component 혹은 streotype 애노테이션이 붙은 **Class들을 자동으로 scan하여 Bean으로 등록해주는 역할**을 해주는 애노테이션.
-  * 스프링부트는 `@ComponentScan`이 붙은 패키지부터 Scan을 한다.
-
-  ---
-</details>
-
-#### Q. ComponentScan 과정
-<details>
-  <summary>답변</summary>
-  
-  ---
-
-  * 스프링 애플리케이션을 동작시키면, 스프링 IoC 컨테이너가 생성된다.
-  * 만약 `@ComponentScan`이 붙은 클래스가 있다면, 해당 클래스를 기준으로 하위 패키지에 등록된 모든 `@Component`가 붙은 클래스를 스캔한다.
-  * 이때, reflection api를 사용한다. (필자는 reflections 라이브러리를 이용하여 Class 파일을 스캔했다.)
-  * 스캔된 클래스를 IoC 컨테이너에 빈으로 등록한다.
+  * `@ComponentScan`이란
+    * **리플렉션 기술**을 활용하여 @Component 혹은 streotype 애노테이션이 붙은 **Class들을 자동으로 scan하여 Bean으로 등록해주는 역할**을 해주는 애노테이션.
+    * 스프링부트는 `@ComponentScan`이 붙은 패키지부터 Scan을 한다.
+  * ComponentScan 과정
+    * 스프링 애플리케이션을 동작시키면, 스프링 IoC 컨테이너가 생성된다.
+    * 만약 `@ComponentScan`이 붙은 클래스가 있다면, 해당 클래스를 기준으로 하위 패키지에 등록된 모든 `@Component`가 붙은 클래스를 스캔한다.
+    * 이때, reflection api를 사용한다. (필자는 reflections 라이브러리를 이용하여 Class 파일을 스캔했다.)
+    * 스캔된 클래스를 IoC 컨테이너에 빈으로 등록한다.
 
   ---
 </details>
@@ -1813,7 +1810,9 @@
     4. `Application Context`에 저장된 빈들의 의존 관계가 주입된다.
     5. 빈들의 생명주기에 맞는 메서드가 실행된다. (빈의 초기화 메서드, 소멸 메서드 등등)
   * 스프링 부트의 경우
-    1. 
+    1. @SpringBootConfiguration
+    2. @ComponentScan
+    3. @EnableAutoConfiguration
 
   ---
 </details>
@@ -1882,6 +1881,11 @@
       * 시점: 핸들러 호출 전(`preHandle`), 호출 후 (`postHandle`), 요청 완료 이후(`afterCompletion`)을 제공.
   * 실행 과정
     * HTTP 요청 -> Servler Container -> Filter -> Servlet (Dispatcher Servlet) -> Interceptor -> Controller
+  * 사용 예시
+    * Filter - 스프링 부트는 서블릿이 하나(디스패처)이기 때문에, 모든 요청에 대한 공통 로직을 처리할 때 사용할 듯 싶다.
+      * xss(cross site sript)방어, 인코딩 변환처리, 로깅.
+    * Interceptor - 스프링의 기능(IoC, AOP등등)을 활용해서 특정 핸들러들에 대한 공통 로직을 처리할 때 사용할 듯 싶다.
+      * 로그인 체크, 권한 체크 등등.
 
   ---
 </details>
@@ -1905,7 +1909,13 @@
   
   --- 
   
-  * 
+  * `@Transactional`
+    * 애플리케이션단에서의 트랜잭션.
+    * 비즈니스 로직을 수행하는데 있어서의 트랜잭션을 의미한다. (DB 트랜잭션보다 범위가 더 넓다.)
+    * 비즈니스 로직을 수행하는데 있어서 DB에 트랜잭션 시작과 COMMIT or ROLLBACK에 대한 요청을 한다.
+  * DB Transaction
+    * DB에 대한 트랜잭션.
+    * 그저 애플리케이션단에서의 요청에 맞춰 COMMIT or ROLLBACK한다.
   
   --- 
 </details>
@@ -2028,6 +2038,22 @@
       * ex. `team.getMembers().add(member)` -> `member.team`을 null로 하여 insert -> team insert -> `member.team` update 쿼리 날림 
       * 자세한 내용 코드는 여기 [](https://github.com/binghe819/jpa-learning-sandbox/blob/relation-mapping-1-N/src/test/java/com/binghe/one_way/OneWayTest.java)
   * 가능한 일대다 양방향을 사용하는 것이 좋다.
+  
+  --- 
+</details>
+
+#### Q. N + 1 문제란?
+<details>
+  <summary>답변</summary>
+  
+  --- 
+  
+  * N + 1문제란?
+    * 쿼리 1번으로 N건의 엔티티를 가져왔는데, 지연 로딩으로 인해 각 엔티티마다 추가 쿼리가 수행되는 현상을 의미합니다.
+    * ex. 팀들 조회 (1) + N개의 팀 각각 조회 (N)
+  * 해결 방안
+    * [fetch join](https://jojoldu.tistory.com/165)
+    * [batch size](https://jojoldu.tistory.com/457)
   
   --- 
 </details>
@@ -3173,6 +3199,7 @@
     * Key와 Value로 매핑된 단순한 맵 형태의 저장소로서 쉽게 읽고 쓸 수 있다. (직관적)
   * NoSQL (Not Only SQL)
     * 대용량의 데이터를 처리하기 용이하다.
+    * NoSQL은 RDBMS에 비해 속도와 확장성이 뛰어나다. (데이터 무결성과 정규화를 지키지 않아도 되기 때문인 듯 하다.)
   * Value 값으로 다양한 Collection을 제공한다.
     * 다양한 Collection (자료구조)를 제공한다.
   * 싱글 스레드
