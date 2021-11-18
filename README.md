@@ -1090,7 +1090,7 @@
       * 이는 여러 액터가 단일 클래스에 의존하며, 의존하는 코드를 너무 가까이 배치했기 때문이다. 분리시켜야 한다.
     * 쉬운 예시
       * 남자보단 남자친구, 남편, 운동선수등등 구체적인 것이 SRP에 적합하다.
-  * [OCP (Open Closed Priciple)](https://github.com/binghe819/TIL/blob/master/OOP&%EC%84%A4%EA%B3%84/SOLID/OCP.md)
+  * [OCP (Open Closed Principle)](https://github.com/binghe819/TIL/blob/master/OOP&%EC%84%A4%EA%B3%84/SOLID/OCP.md)
     * **소프트웨어는 확장에 대해서는 열려 있어야 하지만 변경에 대해서는 닫혀 있어야 한다.**
       * **기존의 코드를 변경하지 않고 (Closed), 기능을 수정하거나 추가할 수 있도록 (Open)해야 한다.**
       * 인터페이스의 코드는 변경하지 않고, 인터페이스에 정의된 기능을 구현하는 구현체는 추가할 수 있도록 하는 원칙
@@ -1098,7 +1098,7 @@
       * 핵심은 컴파일타임 의존성을 고정시키고, 런타임 의존성을 변경하는 것. (동적 바인딩)
     * 예시
       * JDBC
-  * [LSP (Liskov Substitution Priciple)](https://github.com/binghe819/TIL/blob/master/OOP&%EC%84%A4%EA%B3%84/SOLID/LSP.md)
+  * [LSP (Liskov Substitution Principle)](https://github.com/binghe819/TIL/blob/master/OOP&%EC%84%A4%EA%B3%84/SOLID/LSP.md)
     * **상위 타입의 객체를 하위 타입의 객체로 치환해도 상위 타입을 사용하는 프로그램은 정상적으로 동작해야 한다는 원칙**
       * B가 A의 자식 타입이면, 부모 타입인 A객체는 자식 타입인 B로 치환해도, 기존 동작엔 문제가 없어야 한다는 원칙.
       * A - B의 부모 자식에 대한 정의가 논리적으로 제대로 된 상속이어야 기존 프로그램이 자식인 B로 치환해도 문제 없이 작동해야 한다는 의미
@@ -2058,6 +2058,23 @@
   --- 
 </details>
 
+#### Q. `@Transactional(readOnly = true)` 성능 향상 이유
+<details>
+  <summary>답변</summary>
+  
+  --- 
+  
+  읽기 전용 트랜잭션이 사용된다.
+
+  1. 쓰기 지연이 발생하지 않는다.
+     * 하이버네이트 세션 플러시 모드를 MANUAL로 설정하고, 강제로 플러시를 호출하지 않는 한 플러시가 일어나지 않도록 한다.
+     * 트랜잭션을 커밋하더라도 영속성 컨텍스트가 플러시되지 않고 엔티티의 등록, 수정, 삭제가 동작하지 않는다.
+  2. 더티 체킹이 발생하지 않는다.
+     * 더티 체킹(변경 감지)를 하지 않으므로, 성능 향상.
+  
+  --- 
+</details>
+
 <br>
 
 ## 네트워크
@@ -2936,7 +2953,7 @@
   --- 
 </details>
 
-#### Q. 트랜잭션 Isolation Level
+#### Q. 트랜잭션 Isolation Level    
 <details>
   <summary>답변</summary>
   
